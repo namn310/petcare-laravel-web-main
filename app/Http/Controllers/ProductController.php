@@ -18,6 +18,7 @@ class ProductController extends Controller
     {
         // $productPag = product::paginate(8);
         $product = product::paginate(8);
+        $product->sortBy('idPro');
         $category = category::all();
         return view('Admin.Quanlysanpham', ['product' => $product, 'category' => $category]);
     }
@@ -53,9 +54,9 @@ class ProductController extends Controller
         }
         $product->save();
         if ($files = $request->file('imagepro')) {
-            foreach ($files as $file => $value) {
+            foreach ($files as $value) {
                 $extension = $value->getClientOriginalExtension(); //lay tep mo rong cua file
-                $filename =  $value . '-' . time() . '.' . $extension;
+                $filename =    time() . '.' . $extension;
                 $value->move('assets/img-add-pro/', $filename);
                 $imageProduct = ImageProduct::create([
                     'idPro' => $product->idPro,
