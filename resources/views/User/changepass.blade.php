@@ -11,14 +11,12 @@
 <div class="row g-3 align-items-center mx-auto pdt" style="margin-top:50px">
     <div class="col-3">
         <div class="card border-0 ">
-            <img src="../assets/img/avatar-trang-99.jpg" class="card-img-top rounded-circle w-50 mx-auto" alt="">
-            <div class="card-body text-center">
-                <h5 class="card-title"></h5>
-                <p class="card-text">
-
-                </p>
-
-            </div>
+           @if (Auth('customer')->user()->image !='')
+            <img src="{{ asset('assets/img-avt-customer/'.Auth('customer')->user()->image) }}"
+                class="card-img-top rounded-circle w-50 mx-auto" alt="">
+            @else
+            <img src="{{ asset('assets/img/avatar-trang-99.jpg') }}" class="card-img-top rounded-circle w-50 mx-auto" alt="">
+            @endif
         </div>
     </div>
     <div class="col-6">

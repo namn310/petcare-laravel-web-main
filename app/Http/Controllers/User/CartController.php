@@ -8,6 +8,7 @@ use App\Models\category;
 use App\Models\User\Cart;
 use App\Models\product;
 use Illuminate\Support\Facades\Session;
+use Throwable;
 
 class CartController extends Controller
 {
@@ -45,30 +46,13 @@ class CartController extends Controller
     }
     public function delete($id)
     {
-        $cartItemOld = session('cart');
-        // dd($cartItemOld[$id]);
-        $cartItemNew = [];
-        foreach ($cartItemOld as $item) {
-            if ($item['idPro'] != $id) {
-                $productItem = [
-                    'idPro' => $item['idPro'],
-                    'name' => $item['name'],
-                    'cost' => $item['cost'],
-                    'image' => $item['image'],
-                    'discount' => $item['discount'],
-                    'count' => $item['count']
-                ];
-                $cartItemNew[] = $productItem;
-            }
-        }
-        dd(array(session('cart')));
-        //dd($cartItemNew);
-        // session()->forget('cart');
-        foreach ($cartItemNew as $newCart) {
-            //session()->put(['cart' => $this->$newCart]);
-            $idPro = $newCart['idPro'];
-            $count = $newCart['count'];
-            // dd($newCart);
+
+        try {
+            $cart = session('cart');
+            unset($cart[$id]);
+            session(['cart' => $cart]);
+        } catch (Throwable) {
+            return redirect(route('user.cart'))->with('error', 'Xóa sản phẩm thất bại !');
         }
         return redirect(route('user.cart'))->with('status', 'Xóa sản phẩm thành công !');
     }

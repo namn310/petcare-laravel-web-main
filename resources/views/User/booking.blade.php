@@ -26,7 +26,7 @@
 
 @endif
 <!-- Booking -->
-<div class="container mt-4 border pdt">
+<div class="container mt-4 pdt">
   <h3 class="service text-capitalize">ĐẶT LỊCH NGAY</h3>
   <hr>
   <div class="row">

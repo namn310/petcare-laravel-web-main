@@ -41,7 +41,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.php" style="text-decoration: none;" class="logo d-flex align-items-center">
+            <a href="{{ route('admin.home') }}" style="text-decoration: none;" class="logo d-flex align-items-center">
                 <img src="{{ asset('assets/img/PetCARE.png') }}" alt="">
                 <span class="d-none d-lg-block">Admin</span>
             </a>
@@ -314,11 +314,11 @@
                     <i class="fa-solid fa-circle-user"></i><span>Quản lý tài khoản</span>
                 </a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="{{ route('admin.banner') }}">
                     <i class="fa-solid fa-camera-retro"></i><span>Quản lý Banner</span>
                 </a>
-            </li>
+            </li> --}}
 
             <!-- <li class="nav-item">
                 <a class="nav-link" href="index.php?controller=luong">

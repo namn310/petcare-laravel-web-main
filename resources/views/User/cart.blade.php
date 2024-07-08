@@ -24,6 +24,17 @@
                           })
 </script>
 @endif
+@if (session('error'))
+<script>
+  $.toast({
+                          heading: 'Error',
+                          text: '{{ session('error') }}',
+                          showHideTransition: 'slide',
+                          icon: 'error',
+                          position: 'bottom-right'
+                          })
+</script>
+@endif
 <div class="container-fluid" style="margin-top:150px" style="background-color:#C0C0C0;height:max-height">
 
   <div class="table-responsive">

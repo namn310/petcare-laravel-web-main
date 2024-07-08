@@ -59,12 +59,12 @@ $product=product::select()->get();
                 </div>
             </div>
         </div>
-        <div class="row navbar navbar-expand-sm navbar-dark bg-white shadow">
-            <nav class="navbar navbar-expand-sm ">
+        <div class="row navbar navbar-dark bg-white shadow">
+            <nav class="navbar navbar-expand-md ">
                 <div class="container-fluid">
-                    <div class="nav-brand ps-5" style="width: 200px;">
+                    <div class="nav-brand ps-5 text-center" style="width: 200px;">
                         <img class="img cursor: pointer; w-25" src="{{ asset('assets/img/PetCARE.png') }}">
-                        <a class="navbar-brand mx-0" href="index.php" style="color: #F7A98F;">PetCare</a>
+                        <a class="navbar-brand mx-0" href="{{ route('user.home') }}" style="color: #F7A98F;">PetCare</a>
                     </div>
 
                     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
@@ -122,12 +122,12 @@ $product=product::select()->get();
                     <a style="text-decoration:none;color:black" class="me-2 ms-2" href="{{ route('user.login') }}">Đăng
                         Nhập</a><span></span>
                     @else
-                    <a class="nav-item dropdown " href="#">
-                        <a class=" login-button dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                    <div class="nav-item dropdown">
+                        <a class=" login-button dropdown-toggle" style="width:190px" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <small><i class="fa-solid fa-user"></i> {{ Auth::guard('customer')->user()->name }}</small>
                         </a>
-                        <ul class="dropdown-menu" style="left: 1280px;top: 55px;">
+                        <ul class="dropdown-menu" style="top:60px">
                             <li><a class="dropdown-item" href="{{ route('user.orderView') }}"><i
                                         class="fa-solid fa-cart-shopping pe-2" style="color: #cf1717;"></i>Đơn hàng</a>
                             </li>
@@ -136,16 +136,13 @@ $product=product::select()->get();
                                         class="fa-solid fa-gear pe-2"></i>Cài đặt</a></li>
                             <li><a class="dropdown-item" href="{{ route('user.changePassForm') }}"><i
                                         class="fa-solid fa-key pe-2 text-primary"></i>Đổi mật khẩu</a></li>
-
-
-
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item" href="{{ route('user.logout') }}">Đăng Xuất<i
                                         class="fa-solid fa-right-from-bracket text-secondary ps-2"></i></a></li>
                         </ul>
-                    </a>
+                    </div>
                     @endif
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
@@ -154,7 +151,6 @@ $product=product::select()->get();
                     </button>
                 </div>
             </nav>
-
         </div>
         <div>
             <div class="row my-2" style="overflow-y:hidden">
@@ -169,23 +165,18 @@ $product=product::select()->get();
                     </div>
                     <div class="col-4"></div>
                 </div>
-
-
             </div>
-
         </div>
         <div class="d-flex justify-content-center">
             <div id="list-search-product" class="d-flex text-center mt-1 flex-wrap"
                 style="overflow-y:visible;overflow-x:hidden;max-height:300px;width:400px">
-
                 @foreach ($product as $row)
-
                 <div class="listPro bg-white" style="display:none">
                     <div style="border-bottom:1px solid black;height:50px;width:400px;padding-left:10px;padding-right:20px "
                         class="d-flex justify-content-start bg-white ">
-                        <a style="text-decoration:none" href="{{ route('user.productDetail',['id'=>$row->idPro]) }}"> <img
-                                src="{{ asset('assets/img-add-pro/'.$row->getImgProduct($row->idPro)) }}" class="img-fluid"
-                                style="max-width:100%;height:100%"></a>
+                        <a style="text-decoration:none" href="{{ route('user.productDetail',['id'=>$row->idPro]) }}">
+                            <img src="{{ asset('assets/img-add-pro/'.$row->getImgProduct($row->idPro)) }}"
+                                class="img-fluid" style="max-width:100%;height:100%"></a>
                         <p id="product-name-search" class="ms-3">
                             {{ $row->namePro }}
                         </p>
@@ -194,7 +185,6 @@ $product=product::select()->get();
                 @endforeach
             </div>
         </div>
-
     </div>
     @yield('content');
     <script>
@@ -213,8 +203,6 @@ $product=product::select()->get();
                         var b = $(a).text();
                         $(a).parent().parent().toggle($(a).text().toLowerCase().indexOf(q) > -1)
                     });
-
-
                     //console.log(a.parentElement.parentElement);
                 })
 
