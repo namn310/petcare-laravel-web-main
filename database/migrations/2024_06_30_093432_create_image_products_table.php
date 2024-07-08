@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('image');
             $table->timestamps();
             $table->unsignedInteger('idPro');
-            $table->foreign('idPro')->references('idPro')->on('products')->onDelete('set null');
+            $table->foreign('idPro')->references('idPro')->on('products')->onDelete('cascade');
         });
     }
 
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-         Schema::dropIfExists('image_products');
+        Schema::dropIfExists('image_products');
     }
 };
