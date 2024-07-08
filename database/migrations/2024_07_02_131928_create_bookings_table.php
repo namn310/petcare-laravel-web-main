@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',100);
-            $table->string('type',50);
+            $table->string('name', 100);
+            $table->string('type', 50);
             $table->string('name_service');
             $table->string('goi');
-            $table->string('weight',50);
-            $table->string('date',50);
+            $table->string('weight', 50);
+            $table->string('date', 50);
             $table->string('note')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookings');
+        // Schema::dropIfExists('bookings');
     }
 };
