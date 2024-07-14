@@ -177,19 +177,12 @@
                 <label style="font-weight: bolder;" class="control-label mt-3">Danh mục</label>
                 <select class="form-control" onclick="checkDanhMuc()" onchange="checkDanhMuc()" id="danhmucAddpro"
                     name="danhmucAddpro" required>
+                    <option>{{ $product->getCategory($product->idCat) }}</option>
                     @foreach ($category as $row )
-                    @if ($row->idCat==$product->idCat)
-                    <option>
-                        {{ $row->name }}
-                    </option>
-                    @endif
-
                     <option>{{ $row->name }}</option>
                     @endforeach
                 </select>
             </div>
-
-
             <div class="form-group ">
                 <label style="font-weight: bolder;" class="control-label mt-3">Mô tả sản phẩm</label>
 

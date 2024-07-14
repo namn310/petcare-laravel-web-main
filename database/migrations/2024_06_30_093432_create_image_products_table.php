@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('idPro')->references('idPro')->on('products')->onDelete('cascade');
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */

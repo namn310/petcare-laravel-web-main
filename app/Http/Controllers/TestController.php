@@ -5,34 +5,43 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\product;
 use App\Models\Booking;
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
     public function index()
     {
+        $product = product::select()->where('products.idCat', 1)->orderBy('cost', 'desc')->get();
+        // $product = product::select('cost')->orderBy('cost', 'asc')->get();
+        // dd($Pro);
+        // $product = DB::table('products')->select('namePro')->where('idCat', 1)->get();
+        $productlist = [];
+        foreach ($product as $a) {
+            $productItem = [
+                'namePro' => $a->namePro,
+                'cost' => $a->cost,
+                'discount' => $a->discount,
+                'costDiscount' => number_format($a->cost - ($a->cost * $a->discount) / 100),
+                'image' => $a->getImgProduct($a->idPro)
+            ];
+            $productlist[] = $productItem;
+        }
 
-        // $array = [
-        //     'name' => 'nam',
-        //     'age' => 18,
-        //     'year' => 2003
+        dd(response()->json($productlist));
+        return response()->json($productlist);
 
-        // ];
-        // $array1 = [
-        //     'name' => 'nameeeeee',
-        //     'age' => 18,
-        //     'year' => 2003
-
-        // ];
-        // $array2 = [1 => $array, 2 => $array1];
-        // session(['nam' => $array2]);
-
-        // //session()->forget(session('nam')[1]);
-        // dd(session('nam')[1]);
-        return view('User.test');
+        return response()->json(['error' => 'Internal Server Error'], 500);
     }
     public function store(Request $request)
     {
-        $booking = Booking::select()->get()->count();
-        dd($booking);
+        //  dd($request->all());
+        $image = $request->file('image');
+        $count = 0;
+        foreach ($image as $img) {
+            $count++;
+            $ex = $img->getClientOriginalExtension();
+            $filename = time() . ' ' . $count . $ex;
+            print($filename);
+        }
     }
 }

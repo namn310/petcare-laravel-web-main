@@ -73,7 +73,11 @@ Route::group(['namespace' => 'User', 'prefix' => ''], function () {
     Route::get('service', [ServiceUserController::class, 'index'])->name('user.service');
     //product
     Route::get('product/{id}', [ProductUserController::class, 'index'])->name('user.product');
+    // Route::get('product/{id}', [ProductUserController::class, 'getProduct'])->name('user.getPro');
     Route::get('product/detail/{id}', [ProductUserController::class, 'getDetail'])->name('user.productDetail');
+    Route::get('sort', [ProductUserController::class, 'Product'])->name('user.sortproduct');
+    // Route::get('product/nam', [ProductUserController::class, 'SortProduct'])->name('user.sort');
+
     //comment
     Route::post('product/detail/{id}', [CommentController::class, 'store'])->name('user.comment');
     //booking
@@ -90,14 +94,10 @@ Route::group(['namespace' => 'User', 'prefix' => ''], function () {
     Route::get('cart/delete/{id}', [CartController::class, 'delete'])->name('user.delete');
 });
 
-
-
 //admin view
 Route::get('admin/login', function () {
     return view('Admin.pages-login');
 })->name('admin.login');
-
-
 //post đăng nhập
 Route::post('login', [UserController::class, 'checkLogin'])->name('admin.checkLogin');
 //post đăng ký tài khoản

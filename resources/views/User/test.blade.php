@@ -15,19 +15,7 @@
 </head>
 
 <body>
-    <form method="post" action="{{ route('test.store') }}">
-        @csrf
-        @method('POST')
-        <input type="file" multiple name="n[]">
-        <button type="submit">click</button>
-    </form>
-    {{-- <form action="{{ route('test.store') }}" enctype="multipart/form-data" method="post">
-        @csrf
-        @method('POST')
-        <input type="file" name="file[]" multiple>
-        <button type="submit">click</button>
-    </form> --}}
-
+   
 </body>
 <script href="{{ asset('assets/js/script.js') }}"></script>
 

@@ -60,11 +60,17 @@
   .contentabout {
     margin-top: 200px;
   }
+  .cartView{
+    margin-top:190px;
+  }
 }
 
 @media screen and (max-width:1163px) and (min-width:861px) {
   .contentabout {
     margin-top: 150px;
+  }
+  .cartView{
+    margin-top:150px;
   }
 }
 
@@ -72,7 +78,16 @@
   .contentabout {
     margin-top: 130px;
   }
+  .cartView{
+    margin-top:130px;
+  }
 }
+@media screen and (max-width:768px){
+  .product-list{
+    justify-content:center;
+  }
+}
+
 
 /* end responsive about view */
 

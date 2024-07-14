@@ -14,6 +14,11 @@ class OrderDetail extends Model
     public $timestamp = true;
     protected $fillable = ['number', 'idPro', 'price', 'idOrder'];
     use HasFactory;
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+   
     public function getProductName($id)
     {
         $product = DB::table('products')->select("namePro")->where('idPro', $id)->get();

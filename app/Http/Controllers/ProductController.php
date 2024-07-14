@@ -22,9 +22,6 @@ class ProductController extends Controller
         $category = category::all();
         return view('Admin.Quanlysanpham', ['product' => $product, 'category' => $category]);
     }
-
-
-
     /**
      * Show the form for creating a new resource.
      */
@@ -53,10 +50,12 @@ class ProductController extends Controller
             $product->idCat = $row->idCat;
         }
         $product->save();
+        $indexImg = 0;
         if ($files = $request->file('imagepro')) {
             foreach ($files as $value) {
+                $indexImg++;
                 $extension = $value->getClientOriginalExtension(); //lay tep mo rong cua file
-                $filename =    time() . '.' . $extension;
+                $filename =    $indexImg . time() . '.' . $extension;
                 $value->move('assets/img-add-pro/', $filename);
                 $imageProduct = ImageProduct::create([
                     'idPro' => $product->idPro,

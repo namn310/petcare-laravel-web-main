@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Booking;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -37,6 +38,18 @@ class Customer extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    public function booking()
+    {
+        return $this->hasMany(Booking::class);
+    }
     public function checkLoginUser($request)
     {
         if (Auth::guard('customer')->attempt(['email' => $request->email, 'password' => $request->password])) {

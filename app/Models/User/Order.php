@@ -16,6 +16,14 @@ class Order extends Model
     public $timestamp = true;
     protected $fillable = ['idCus', 'status', 'address', 'note', 'thanhtoan'];
     use HasFactory;
+    public function customer()
+    {
+        return $this->belongsTo(customer::class);
+    }
+    public function orderDetail()
+    {
+        return $this->hasMany(orderDetail::class);
+    }
     public function getCus($id)
     {
         $customer = DB::table('customer')->select('name')->where('id', $id)->get();
@@ -66,7 +74,7 @@ class Order extends Model
     public function getTotalCost($id)
     {
         $total = 0;
-        $order = OrderDetail::select('number', 'price','idPro')->where('idOrder', $id)->get();
+        $order = OrderDetail::select('number', 'price', 'idPro')->where('idOrder', $id)->get();
         foreach ($order as $row) {
             if ($row->getProductDiscount($row->idPro) > 0) {
                 $total += $row->number * ($row->price - ($row->price *

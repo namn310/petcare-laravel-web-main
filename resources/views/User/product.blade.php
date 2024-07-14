@@ -28,7 +28,6 @@
       <ul class="category list-group">
         <!-- Lấy dữ liệu bảng danh mục xuất ra danh mục -->
         @foreach ($category as $row )
-
         <li class="list-group-item"><a href="{{ route('user.product',['id'=>$row->idCat]) }}"> <button
               class="btn btn-white" style="width:100%">
               {{ $row->name }}
@@ -41,6 +40,7 @@
         <h3 style="color:black">
           @foreach ($categoryName as $name )
           {{ $name->name }}
+          <p class="hiddenCat" hidden>{{ $name->idCat }}</p>
           @endforeach
         </h3>
         {{-- button tìm kiếm --}}
@@ -52,73 +52,202 @@
         </form>
       </nav>
       {{-- Danh sách sản phẩm --}}
-      <div class="product-list container d-flex align-items-start flex-wrap">
-        <!-- Lấy dữ liệu từ bảng product để xuất ra sản phẩm -->
-        @foreach ($product as $result )
-
-        {{-- Thông tin sản phẩm --}}
-        <div id="product-infor" class="card position-relative" style="width: 15rem;height:29rem" style="border:0px">
-          {{-- giảm giá sản phẩm --}}
-          @if ($result->discount>0)
-          <div class="onsale position-absolute top-0 start-0">
-            <span class="badge rounded-0 bg-danger"><i class="fa-solid fa-arrow-down"></i>
-              {{ $result->discount }}%
-            </span>
-          </div>
-          @endif
-          <div>
-            {{-- hình ảnh sản phẩm --}}
-            <a id="img_pro" href="{{ route('user.productDetail',['id'=>$result->idPro]) }}"> <img
-                class="card-img-top img-fluid p-2" style="max-height:20rem"
-                src="{{ asset('assets/img-add-pro/'.$result->getImgProduct($result->idPro)) }}"
-                alt="Card image cap"></a>
-          </div>
-          <div class="card-body" id="card-body">
-            <h6 id="name-product" class="card-title">
-              {{ $result->namePro }}
-
-            </h6>
-            <span class="rating secondary-font">
-              <i class="fa-solid fa-star text-warning"></i>
-              <i class="fa-solid fa-star text-warning"></i>
-              <i class="fa-solid fa-star text-warning"></i>
-              <i class="fa-solid fa-star text-warning"></i>
-              <i class="fa-solid fa-star text-warning"></i>
-              5.0</span>
-            @if ($result->discount<=0) <p class="card-text text-danger">
-              {{ number_format($result->cost) }}đ
-              </p>
-              @else
-              <p class="card-text text-danger text-decoration-line-through">
-                {{ number_format($result->cost) }}đ
-              </p>
-              <p class="card-text text-danger" style="margin-top:-15px">
-
-                {{ number_format($result->cost - ($result->cost * $result->discount) / 100); }}đ
-              </p>
-              @endif
-              <a href="{{ route('user.add',['id'=>$result->idPro]) }}" style="text-decoration:none;color:white"><button
-                  type="submit" style="position:absolute;top:0;right:0" class="btn btn-white shadow-sm rounded-pill"><i
-                    style="color:black" class="fa-solid fa-cart-shopping text-danger"></i></button></a>
-          </div>
-        </div>
-        @endforeach
-
-      </div>
-      <!--
-      <div class="mt-3 d-flex ">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">...</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      <div>
+        <div class="dropdown">
+          <button class="btn btn-white dropdown-toggle" style="border:1px solid black" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Sắp xếp
+          </button>
+          <ul class="dropdown-menu">
+            <li><button class="sort-button btn btn-white" data-field="cost" data-order="asc">Giá tăng từ thấp ->
+                cao</button></li>
+            <li><button class="sort-button btn btn-white" data-field="cost" data-order="desc">Giá từ cao ->
+                thấp</button></li>
+            <li><button class="sort-button btn btn-white" data-field="namePro" data-order="asc">Sắp xếp từ A ->
+                Z</button></li>
+            <li><button class="sort-button btn btn-white" data-field="namePro" data-order="desc">Sắp xếp từ Z ->
+                A</button></li>
           </ul>
-        </nav>
+        </div>
       </div>
-      -->
+
+      {{-- <script>
+        $(document).ready(function(){
+          $('.sort-button').click(function(){
+             $productCost=document.querySelectorAll("#productCostHidden");
+            //  $product=$productCost.innerHTML;
+            //console.log($product);
+            $productCost.forEach((cost)=>{
+              console.log($(cost).parent().parent());
+            })
+          })
+          
+      })
+      </script> --}}
+      <script>
+        $(document).ready(function() {
+        $('.sort-button').on('click', function() {
+            var field = $(this).data('field');
+            var order = $(this).data('order');
+            var idCat = $('.hiddenCat').text();
+            console.log(field,order,idCat);
+            $.ajax({
+                url: "{{ route('user.sortproduct') }}",
+                method: 'get',
+                data: {
+                    sort_field: field,
+                    sort_order: order,
+                    catId:idCat
+                },
+                success: function(response){
+                  // console.log(true);
+                  $('.product-list').empty();
+                  response.forEach(function(product){
+                    
+                    if(product.discount==null){
+                    $('.product-list').append(`
+                  {{-- Thông tin sản phẩm --}}
+                  <div id="product-infor" class="card position-relative" style="max-width:15rem;height:27rem" style="border:0px">
+                    {{-- giảm giá sản phẩm --}}
+                    <div>
+                        {{-- hình ảnh sản phẩm --}}
+                        <a id="img_pro" href="/product/detail/${product.idPro}"> <img class="card-img-top img-fluid p-2" style="max-height:20rem"
+                            src="{{ asset('assets/img-add-pro/${product.image}') }}" alt="Card image cap"></a>
+                      </div>
+                    <div class="onsale position-absolute top-0 start-0">
+                     
+                    </div>                   
+                    <div class="card-body" id="card-body">
+                      <h6 id="name-product" class="card-title">
+                        ${product.namePro}
+                      </h6>
+                      
+                      <span class="rating secondary-font">
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <i class="fa-solid fa-star text-warning"></i>
+                        5.0</span>
+                   <p class="card-text text-danger ">
+                      ${product.cost}đ
+                    </p>
+                        <a href="cart/addPro/${product.idPro}" style="text-decoration:none;color:white"><button
+                            type="submit" style="position:absolute;top:0;right:0" class="btn btn-white shadow-sm rounded-pill"><i
+                              style="color:black" class="fa-solid fa-cart-shopping text-danger"></i></button></a>
+                    </div>
+                  </div>
+                    `)
+                }
+                else{
+                  $('.product-list').append(`
+                  {{-- Thông tin sản phẩm --}}
+                  <div id="product-infor" class="card position-relative" style="max-width:15rem;height:27rem" style="border:0px">
+                    {{-- giảm giá sản phẩm --}}
+                    
+                    <div>
+                      {{-- hình ảnh sản phẩm --}}
+                      <a id="img_pro" href="/product/detail/${product.idPro}"> <img
+                          class="card-img-top img-fluid p-2" style="max-height:20rem"
+                          src="{{ asset('assets/img-add-pro/${product.image}') }}" alt="Card image cap"></a>
+                    </div>
+                    <div class="card-body" id="card-body">
+                      <h6 id="name-product" class="card-title">
+                      ${product.namePro}
+                  
+                      </h6>
+                      <span class="rating secondary-font">
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <i class="fa-solid fa-star text-warning"></i>
+                        <i class="fa-solid fa-star text-warning"></i>
+                        5.0</span>
+                   
+                        <p class="card-text text-danger text-decoration-line-through">
+                        ${product.cost}đ
+                        </p>
+                        <p class="card-text text-danger" style="margin-top:-15px">
+                  
+                          ${product.costDiscount}đ
+                        </p>
+                     
+                        <a href="cart/addPro/${product.idPro}" style="text-decoration:none;color:white"><button
+                            type="submit" style="position:absolute;top:0;right:0" class="btn btn-white shadow-sm rounded-pill"><i
+                              style="color:black" class="fa-solid fa-cart-shopping text-danger"></i></button></a>
+                    </div>
+                  </div>
+                  `)
+                }
+                  })
+                }
+                // error: function(xhr, status, error) {
+                // console.error('AJAX Error: ' + status + ' - ' + error);
+                // console.error(xhr.responseText);
+                // }
+            });
+        });
+    });
+      </script>
+      <div class="nam">
+        <div class="product-list container d-flex align-items-start flex-wrap">
+          <!-- Lấy dữ liệu từ bảng product để xuất ra sản phẩm -->
+          @foreach ($products as $product )
+
+          {{-- Thông tin sản phẩm --}}
+          <div id="product-infor" class="card position-relative" style="max-width:15rem;height:27rem"
+            style="border:0px">
+            {{-- giảm giá sản phẩm --}}
+            @if ($product->discount>0)
+            <div class="onsale position-absolute top-0 start-0">
+              <span class="badge rounded-0 bg-danger"><i class="fa-solid fa-arrow-down"></i>
+                {{ $product->discount }}%
+              </span>
+            </div>
+            @endif
+            <div>
+              {{-- hình ảnh sản phẩm --}}
+              <a id="img_pro" href="{{ route('user.productDetail',['id'=>$product->idPro]) }}"> <img
+                  class="card-img-top img-fluid p-2" style="max-height:20rem"
+                  src="{{ asset('assets/img-add-pro/'.$product->getImgProduct($product->idPro)) }}"
+                  alt="Card image cap"></a>
+            </div>
+            <div class="card-body" id="card-body">
+              <h6 id="name-product" class="card-title">
+                {{ $product->namePro }}
+
+              </h6>
+              <span class="rating secondary-font">
+                <i class="fa-solid fa-star text-warning"></i>
+                <i class="fa-solid fa-star text-warning"></i>
+                <i class="fa-solid fa-star text-warning"></i>
+                <i class="fa-solid fa-star text-warning"></i>
+                <i class="fa-solid fa-star text-warning"></i>
+                5.0</span>
+              @if ($product->discount<=0) <p class="card-text text-danger">
+                {{ number_format($product->cost) }}đ
+                </p>
+
+                <p hidden id="productCostHidden">{{ $product->cost }}</p>
+                @else
+                <p class="card-text text-danger text-decoration-line-through">
+                  {{ number_format($product->cost) }}đ
+                </p>
+                <p class="card-text text-danger" style="margin-top:-15px">
+
+                  {{ number_format($product->cost - ($product->cost * $product->discount) / 100); }}đ
+                </p>
+                <p hidden id="productCostHidden">{{ $product->cost - ($product->cost * $product->discount) / 100 }}</p>
+                @endif
+                <a href="{{ route('user.add',['id'=>$product->idPro]) }}"
+                  style="text-decoration:none;color:white"><button type="submit" style="position:absolute;top:0;right:0"
+                    class="btn btn-white shadow-sm rounded-pill"><i style="color:black"
+                      class="fa-solid fa-cart-shopping text-danger"></i></button></a>
+            </div>
+          </div>
+          @endforeach
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -140,8 +269,7 @@
   </div>
 </div>
 <!-- End mục sản phẩm-->
-
-<script src="js/script.js"></script>
+<script href="{{ asset('assets/js/script.js') }}"></script>
 <!-- Tìm kiếm sản phẩm -->
 <script>
   //searchProduct
@@ -159,4 +287,5 @@
     });
   });
 </script>
+
 @endsection

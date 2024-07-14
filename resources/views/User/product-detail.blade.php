@@ -89,22 +89,28 @@
             @if (!$row->discount>0) <p class="card-text text-danger">Giá: {{ $row->cost }}</p>
             @else
             <p>
-              <span>Giá gốc:
-                <i class="card-text text-danger text-decoration-line-through">{{ number_format( $row->cost) }} đ</i>
+              <span>
+                <b class="card-text text-black text-decoration-line-through"
+                  style="border-right:solid black 1px;padding-right:5px">{{ number_format( $row->cost) }} đ</b>
+                <b class="card-text text-danger">{{ number_format($row->cost - ($row->cost * $row->discount) / 100);
+                  }}đ</b>
               </span>
             </p>
-            <p class="card-text text-danger">{{ number_format($row->cost - ($row->cost * $row->discount) / 100); }}đ</p>
+
             @endif
 
             <!-- Button trigger modal -->
+            @if ($row->count>0)
             <button type="button" style="width:20% ;margin-left:10px;margin-bottom:20px" id="cartSucess"
               class="btn btn-danger mt-3">
               <a style="text-decoration:none;color:white" href="{{ route('user.add',['id'=>$row->idPro]) }}">
                 Mua
-              </a>
-
-            </button>
-
+              </a></button>
+            @else
+            <button type="button" style="width:20% ;margin-left:10px;margin-bottom:20px" id="cartSucess"
+              class="btn btn-danger mt-3">
+              Hàng tạm hết</button>
+            @endif
           </div>
         </div>
       </div>
@@ -166,12 +172,8 @@
 
 
             </div>
-
             <!-- end danh sách bình luận -->
-
           </div>
-
-
         </div>
       </div>
       <script>

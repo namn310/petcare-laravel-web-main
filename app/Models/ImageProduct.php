@@ -12,4 +12,7 @@ class ImageProduct extends Model
     public $timestamp = true;
     protected $fillable = ['idPro', 'image'];
     use HasFactory;
+    public function product(){
+        return $this->belongsTo(product::class);
+    }
 }

@@ -8,7 +8,7 @@ use App\Models\category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use App\Models\ImageProduct;
-
+use App\Models\User\Comment;
 
 class product extends Model
 {
@@ -20,6 +20,14 @@ class product extends Model
     public function category()
     {
         return $this->hasMany(product::class);
+    }
+    public function imageProducts()
+    {
+        return $this->hasMany(ImageProduct::class);
+    }
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function create($request)
@@ -48,17 +56,7 @@ class product extends Model
                     'image' => $filename
                 ]);
 
-                // $imageProduct = ImageProduct::create([
-                //     'idPro' => $lastProduct,
-                //     'image' => $filename,
-                // ]);
-                // $imageProduct->save();
             }
-
-            // foreach ($imageProduct as $row) {
-            //     $product->image = $row['img'];
-            // }
-            //$product->image = $imageProduct;
         }
         return redirect(route('admin.product'))->with('notice', 'Thêm sản phẩm thành công');
     }
@@ -78,6 +76,7 @@ class product extends Model
         $product->update();
         $imgProduct = ImageProduct::select()->where('idPro', $id)->get();
         //dd($imgProduct);
+        $indexImg = 0;
         if ($files = $request->file('imagepro')) {
             foreach ($files as $file) {
                 foreach ($imgProduct as $result) {
@@ -90,27 +89,19 @@ class product extends Model
                     // dd($imgElement);
                     // $imgElement->delete();
                 }
+                $indexImg++;
                 $extension = $file->getClientOriginalExtension(); //lay tep mo rong cua file
-                $filename =  time() . '.' . $extension;
+                $filename =  $indexImg . time() . '.' . $extension;
                 $file->move('assets/img-add-pro', $filename);
-                // $product->image = $filename;
-                // $img = ['img' => $filename];
-                //array_push($imageProduct, $img)
-                // $imageProduct[] = $img;
+             
                 $imageProduct = new ImageProduct();
                 $imageProduct->idPro = $product->idPro;
                 $imageProduct->image = $filename;
-                // $imageProduct = ImageProduct::create([
-                //     'idPro' => $lastProduct,
-                //     'image' => $filename,
-                // ]);
+            
                 $imageProduct->save();
             }
 
-            // foreach ($imageProduct as $row) {
-            //     $product->image = $row['img'];
-            // }
-            //$product->image = $imageProduct;
+         
         }
     }
     public function getImgProduct($id)
@@ -132,4 +123,12 @@ class product extends Model
             return $row->namePro;
         }
     }
+    public function getCategory($id)
+    {
+        $category = DB::table('categories')->select('name')->where('idCat', $id)->get();
+        foreach ($category as $row) {
+            return $row->name;
+        }
+    }
+    // src="{{ asset('assets/img-add-pro/') }}${product.idPro}"
 }

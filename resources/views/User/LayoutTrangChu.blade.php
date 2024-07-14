@@ -17,6 +17,7 @@ $product=product::select()->get();
     <title>Pet Care</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/img/PetCARE.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
     <link rel="stylesheet" href="{{ asset('assets/css/user-responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/user1.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -87,8 +88,7 @@ $product=product::select()->get();
                                     <a class="nav-link mx-lg-2 " href="{{ route('user.service') }}">Dịch vụ</a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link mx-lg-2 "
-                                        href="{{ route('user.product',['id'=>DB::table('categories')->first()->idCat]) }}">Sản
+                                    <a class="nav-link mx-lg-2 " href="{{ route('user.product',['id'=>' ']) }}">Sản
                                         phẩm</a>
                                 </li>
                                 <li class="nav-item">
@@ -122,7 +122,7 @@ $product=product::select()->get();
                     <a style="text-decoration:none;color:black" class="me-2 ms-2" href="{{ route('user.login') }}">Đăng
                         Nhập</a><span></span>
                     @else
-                    <div class="nav-item dropdown">
+                    <div class="nav-item dropdown me-5">
                         <a class=" login-button dropdown-toggle" style="width:190px" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             <small><i class="fa-solid fa-user"></i> {{ Auth::guard('customer')->user()->name }}</small>

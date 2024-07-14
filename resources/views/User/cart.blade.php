@@ -35,7 +35,7 @@
                           })
 </script>
 @endif
-<div class="container-fluid" style="margin-top:150px" style="background-color:#C0C0C0;height:max-height">
+<div class="container-fluid cartView" style="height:max-height">
 
   <div class="table-responsive">
     <h3 class="text-center text-header" style="color:#EA9E1E">GIỎ HÀNG <i class="fa-solid fa-cart-arrow-down"
