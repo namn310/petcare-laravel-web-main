@@ -7,6 +7,28 @@
     }
   }
 
+  @media screen and (max-width:1200px) {
+    .product-detail {
+      flex-direction: column;
+    }
+  }
+
+  @media screen and (max-width:800px) {
+    .img-slide {
+      display: none
+    }
+
+    .img-slide-small {
+      display: block
+    }
+  }
+
+  @media screen and (min-width:801px) {
+    .img-slide-small {
+      display: none;
+    }
+  }
+
   @media screen and (max-width:750px) {
     .a {
       margin-top: 100px;
@@ -22,16 +44,16 @@
   }
 </style>
 <script>
-  $(document).ready(function(){
-    //var listImage=document.querySelectorAll("main-img-product");
-    var listImage=document.querySelectorAll(".list-img");
-    listImage.forEach(img => {
-      var a = $(img).attr('src');
-      $(img).click(function(){
-        $('.main-img-product').attr('src',a);
-      })
-    });
-  })
+  $(document).ready(function() {
+            //var listImage=document.querySelectorAll("main-img-product");
+            var listImage = document.querySelectorAll(".list-img");
+            listImage.forEach(img => {
+                var a = $(img).attr('src');
+                $(img).click(function() {
+                    $('.main-img-product').attr('src', a);
+                })
+            });
+        })
 </script>
 <!-- Danh mục sản phẩm-->
 <div class="container-fluid pdt">
@@ -44,30 +66,60 @@
           <!-- <button class="btn btn-outline-success my-2 my-sm-0 ml-3" id="buttonSearch" type="button">Search</button> -->
         </form>
       </nav>
-      @foreach ($productDetail as $row )
-      <div class="product-detail d-flex">
-        <div style="position:relative;max-height:550px">
-          <div class="d-flex flex-column justify-content-center img-slide mt-3"
-            style="max-height:550px;overflow:hidden">
-            @foreach ($productListImg as $result )
-            <div style=" max-width:140px"><img class="img-fluid p-2 list-img"
-                src="{{ asset('assets/img-add-pro/'.$result->image) }}"></div>
-            @endforeach
+      <script>
+        window.onload = function() {
+                        $(document).ready(function() {
+                            $('.img-slide').slick({
+                                slidesToShow: 1,
+                                slidesToScroll:1,
+                                infinite: true,
+                                arrows: true,
+                                centerMode: true,
+                                cssEase: 'linear',
+                                accessibility: true,
+                                autoplay: true,
+                                autoplaySpeed: 900,
+                                vertical: true,
+                            });
+                            $('.img-slide-small').slick({
+                            slidesToShow: 1,
+                            slidesToScroll:1,
+                            infinite: true,
+                            arrows: true,
+                            cssEase: 'linear',
+                            accessibility: true,
+                            autoplay: true,
+                            autoplaySpeed: 900,
+                            });
 
-          </div>
-          <button style="position:absolute;bottom:-40px;left:40px" class="btn btn-white "><i
-              class="fa-solid fa-angle-down fa-xl"></i></button>
-          <button style="position:absolute;top:-10px;left:40px" class="btn btn-white "><i
-              class="fa-solid fa-angle-up fa-xl"></i></button>
+                        });
+                    }
+      </script>
+
+      @foreach ($productDetail as $row)
+      <div class="d-flex">
+        <div class="img-slide mt-3" style="max-height:550px;max-width:200px;overflow:hidden">
+          @foreach ($productListImg as $result)
+          <div style="max-width:140px;border-top:1px solid black;border-bottom:1px solid black"><img
+              class="img-fluid p-2 list-img" src="{{ asset('assets/img-add-pro/' . $result->image) }}"></div>
+          @endforeach
+
         </div>
-        <div class="d-flex justify-content-between">
+        <div class="product-detail d-flex justify-content-around">
           <div class="product-detail-img ms-2">
             {{-- Ảnh sản phẩm --}}
             <img class="img-float main-img-product" id="main-img-product"
               style="max-width:800px;max-height:600px;border:1px solid  #EA9E1E;border-radius:5px"
-              src="{{ asset('assets/img-add-pro/'.$productMainImg) }}">
+              src="{{ asset('assets/img-add-pro/' . $productMainImg) }}">
+
+            <div class="img-slide-small ms-2" style="max-width:140px">
+              @foreach ($productListImg as $result)
+              <div style="max-width:140px"><img class="img-fluid p-2 list-img"
+                  src="{{ asset('assets/img-add-pro/' . $result->image) }}"></div>
+              @endforeach
+            </div>
           </div>
-          <div class="product-detail-intro ms-5">
+          <div class="product-detail-intro ms-5 text-break">
             <p>
               {{-- Tên sản phẩm --}}
             <h4>
@@ -86,24 +138,25 @@
               <i class="fa-solid fa-star text-warning"></i>
               <i class="fa-solid fa-star text-warning"></i>
               5.0</span>
-            @if (!$row->discount>0) <p class="card-text text-danger">Giá: {{ $row->cost }}</p>
+            @if (!$row->discount > 0)
+            <p><b>Giá:</b><span class="card-text text-danger"> {{ number_format($row->cost) }}đ</span></p>
             @else
             <p>
               <span>
                 <b class="card-text text-black text-decoration-line-through"
-                  style="border-right:solid black 1px;padding-right:5px">{{ number_format( $row->cost) }} đ</b>
-                <b class="card-text text-danger">{{ number_format($row->cost - ($row->cost * $row->discount) / 100);
+                  style="border-right:solid black 1px;padding-right:5px">{{ number_format($row->cost) }}
+                  đ</b>
+                <b class="card-text text-danger">{{ number_format($row->cost - ($row->cost * $row->discount) / 100)
                   }}đ</b>
               </span>
             </p>
-
             @endif
 
             <!-- Button trigger modal -->
-            @if ($row->count>0)
+            @if ($row->count > 0)
             <button type="button" style="width:20% ;margin-left:10px;margin-bottom:20px" id="cartSucess"
               class="btn btn-danger mt-3">
-              <a style="text-decoration:none;color:white" href="{{ route('user.add',['id'=>$row->idPro]) }}">
+              <a style="text-decoration:none;color:white" href="{{ route('user.add', ['id' => $row->idPro]) }}">
                 Mua
               </a></button>
             @else
@@ -126,17 +179,17 @@
           </li>
         </ul>
         <!-- Mô tả sản phẩm -->
-        <div class="thongtinchitiet mt-3" style="padding-bottom:50px">
-          <?php echo $row->description ?>
+        <div class="thongtinchitiet mt-3 ms-4" style="padding-bottom:50px">
+          <?php echo $row->description; ?>
 
         </div>
         <!--  Bình luận sản phẩm -->
         <div class="comment mt-3">
           <!--           <iframe style="width:100%" src="../../Project-petcare-php/user/Views/Comment.php"></iframe>
- -->
+     -->
           @if (Auth::guard('customer')->check())
           <!-- box comment -->
-          <form method="post" action="{{ route('user.comment',['id'=>$row->idPro]) }}">
+          <form method="post" action="{{ route('user.comment', ['id' => $row->idPro]) }}">
             @csrf
             @method('post')
             <input placeholder="Nhập bình luận của bạn" style="width:100%;border-radius:10px;height:50px" name="comment"
@@ -150,13 +203,13 @@
           {{-- @if (Auth::guard('customer')->check()) --}}
           <div class="container" style="width:70%;height:300px;margin-top:20px;overflow-y:auto;overflow-x:hidden">
             <div class="list-comment mt-5" style="background-color:#EEEEEE;border-radius:6px" width="80%">
-              @foreach ($comment as $cmt )
+              @foreach ($comment as $cmt)
               <div class="d-flex mt-3 ms-5">
                 {{-- avt user --}}
                 <div class="me-4">
                   <img style="width:50px;height:50px;margin-left:40px;margin-top:10px;border-radius:20px"
                     class="img-fluid rounded text-center"
-                    src="{{ asset('assets/img-avt-customer/'.$cmt->getAvtCus($cmt->idCus)) }}">
+                    src="{{ asset('assets/img-avt-customer/' . $cmt->getAvtCus($cmt->idCus)) }}">
                 </div>
 
                 <div class=""
@@ -178,17 +231,17 @@
       </div>
       <script>
         $(document).ready(function() {
-          $(".comment").hide();
+                            $(".comment").hide();
 
-          $("#comment").click(function() {
-            $(".thongtinchitiet").hide();
-            $(".comment").show();
-          })
-          $("#mota").click(function() {
-            $(".thongtinchitiet").show();
-            $(".comment").hide();
-          })
-        })
+                            $("#comment").click(function() {
+                                $(".thongtinchitiet").hide();
+                                $(".comment").show();
+                            })
+                            $("#mota").click(function() {
+                                $(".thongtinchitiet").show();
+                                $(".comment").hide();
+                            })
+                        })
       </script>
       <!-- modal thông báo thêm hàng vào giỏ  -->
       <div class="modal fade" id="modalbuyproduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -203,7 +256,8 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Hủy</button>
-              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Xác nhận</button>
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">Xác
+                nhận</button>
             </div>
           </div>
         </div>
@@ -233,13 +287,13 @@
 <script src="{{ asset('assets/js/script.js') }}"></script>
 <script>
   const toastTrigger = document.getElementById('liveToastBtn');
-  const toastLiveExample = document.getElementById('liveToast');
+        const toastLiveExample = document.getElementById('liveToast');
 
-  if (toastTrigger) {
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
-    toastTrigger.addEventListener('click', () => {
-      toastBootstrap.show()
-    })
-  }
+        if (toastTrigger) {
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+            toastTrigger.addEventListener('click', () => {
+                toastBootstrap.show()
+            })
+        }
 </script>
 @endsection

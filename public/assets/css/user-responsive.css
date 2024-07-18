@@ -23,6 +23,7 @@
     display: none;
   }
 }
+/* 
 
 @media screen and (max-width: 580px) {
   .search-box {
@@ -33,60 +34,77 @@
   .button-list-phone {
     padding-top: 15px;
   }
-}
-
-/* reponsive home view */
-@media screen and (max-width:859px) {
-  .contentuser {
-    margin-top: 150px;
-  }
-}
-
-@media screen and (min-width:859px) {
-  .contentuser {
-    margin-top: 130px;
-  }
-}
-
-/* end responsive home view */
-
-/* reponsive about view */
-/* @media screen  and (max-width:767px){
-  .contentabout {
-    margin-top: 200px;
-  }
 } */
-@media screen  and (max-width:860px) {
-  .contentabout {
-    margin-top: 200px;
+/* search navbar */
+@media screen and (max-width:1200px) {
+   #InputContainer{
+    display:none;
+  }
+  .navbar-toggler{
+    order:1;
+  }
+  #btnSearchNav{
+    order:2;
+  }
+  .nav-brand{
+    order:3;
+  }
+  .buttonInforUser{
+    order:4;
+  }
+   /* reponsive home view */
+  .contentuser{
+    margin-top:200px;
+  }
+  /* end responsive home view */
+  .contentabout{
+    margin-top:180px;
   }
   .cartView{
-    margin-top:190px;
+    margin-top:200px;
+  }
+  .productViewUser{
+    margin-top:200px;
   }
 }
-
-@media screen and (max-width:1163px) and (min-width:861px) {
-  .contentabout {
-    margin-top: 150px;
+@media screen and (min-width:1201px) {
+  #btnSearchNav{
+    display:none;
   }
+  /* reponsive home view */
+  .contentuser{
+    margin-top:200px;
+  }
+  .contentabout{
+    margin-top:240px;
+  }
+  /* end responsive home view */
   .cartView{
-    margin-top:150px;
+    margin-top:240px;
+  }
+  .productViewUser{
+    margin-top:220px;
   }
 }
-
-@media screen and (min-width:1164px) {
-  .contentabout {
-    margin-top: 130px;
+@media screen and (max-width:1000px){
+  .MenuCat{
+    display:none
   }
-  .cartView{
-    margin-top:130px;
+  .product-list{
+    justify-content:flex-start;
   }
 }
+@media screen and(min-width:1001px) {
+  .product-list{
+    justify-content: flex-start;
+  }  
+}
+/* 
 @media screen and (max-width:768px){
   .product-list{
     justify-content:center;
   }
-}
+} */
 
 
 /* end responsive about view */
