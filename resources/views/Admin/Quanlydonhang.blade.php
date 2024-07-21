@@ -1,7 +1,7 @@
 @extends('Admin.Layout')
 @section('content')
 <div class="pagetitle">
-  <h1>Danh Sách Đơn Hàng</h1>
+  <h1 style="font-size:2vw;font-size:2vh">Danh Sách Đơn Hàng</h1>
 
 </div><!-- End Page Title -->
 @if (session('status'))
@@ -20,7 +20,7 @@
   <div class="row">
     <div class="search mt-4 mb-4 input-group" style="width:50%">
       <button class="input-group-text btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></button>
-      <input class="form-control" type="text" id="searchOrders">
+      <input style="font-size:2vw;font-size:2vh" class="form-control" type="text" id="searchOrders">
     </div>
     <div class="col-lg-12">
 
@@ -28,7 +28,7 @@
         <div class="card-body table-responsive">
 
           <!-- Table with stripped rows -->
-          <table class="table text-center">
+          <table style="font-size:2vw;font-size:2vh" class="table text-center">
             <thead>
               <tr>
                 <th>
@@ -50,13 +50,13 @@
                 <td>{{ $order->getPhone($order->idCus) }}</td>
                 <td>{{ $order->created_at }}</td>
                 @if ($order->status > 0)
-                <td><button class=" btn btn-success">Đã giao hàng</button> </td>
+                <td><button style="font-size:2vw;font-size:2vh" class=" btn btn-success">Đã giao hàng</button> </td>
                 @else
-                <td><button class="btn btn-danger">Chưa giao hàng</button> </td>
+                <td><button style="font-size:2vw;font-size:2vh" class="btn btn-danger">Chưa giao hàng</button> </td>
                 @endif
 
                 <td>
-                  <a style="color:white;text-decoration:none"> <button data-bs-toggle="modal"
+                  <a style="color:white;text-decoration:none"> <button style="font-size:2vw;font-size:2vh" data-bs-toggle="modal"
                       data-bs-target="#deleteOrder{{ $order->id }}" class="btn btn-danger"> <i
                         class="bi bi-trash"></i></button></a>
                   <!-- Modal xóa order -->
@@ -81,7 +81,7 @@
                     </div>
                   </div>
 
-                  <a> <button data-bs-toggle="modal" data-bs-target="#delivery{{ $order->id }}"
+                  <a> <button style="font-size:2vw;font-size:2vh" data-bs-toggle="modal" data-bs-target="#delivery{{ $order->id }}"
                       class="btn btn-success"><i class="fa-solid fa-truck"></i></button></a>
                   <!-- Modal giao hàng -->
 
@@ -106,7 +106,7 @@
                     </div>
                   </div>
 
-                  <button class="btn btn-primary"><a style="color:white;text-decoration:none"
+                  <button style="font-size:2vw;font-size:2vh" class="btn btn-primary"><a style="color:white;text-decoration:none"
                       href="{{ route('admin.detail',['id'=>$order->id]) }}">Xem </a></button>
 
                 </td>
@@ -118,7 +118,7 @@
           <!-- End Table with stripped rows -->
 
           <ul class="pagination">
-            <li class="page-item disabled"><a href="#" class="page-link">Trang</a></li>
+            <li style="font-size:2vw;font-size:2vh" class="page-item disabled"><a href="#" class="page-link">Trang</a></li>
           </ul>
         </div>
       </div>

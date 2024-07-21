@@ -42,7 +42,7 @@ $product = product::select()->get();
         <div class="d-flex justify-content-between bg-dark py-2 px-lg-5 flex-wrap text-center align-items-center">
             <div class="text-left mb-2 mb-lg-0 d-inline-flex">
                 <a class="text-white px-3" href="">
-                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-facebook-f">nammmmm</i>
                 </a>
                 <a class="text-white px-3" href="">
                     <i class="fab fa-twitter"></i>
@@ -145,7 +145,7 @@ $product = product::select()->get();
                 </div>
                 {{-- navbar --}}
                 <div>
-                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                    <div class="offcanvas offcanvas-en" tabindex="-1" id="offcanvasNavbar"
                         aria-labelledby="offcanvasNavbarLabel">
                         <div class="offcanvas-header">
 
@@ -174,20 +174,7 @@ $product = product::select()->get();
                                 {{-- <li class="nav-item me-4">
                                     <a class="nav-link" href="{{ route('user.contact') }}"><b>Liên hệ </b></a>
                                 </li> --}}
-                                <li class="nav-item me-4">
-                                    <a class="nav-link" type="button" href="{{ route('user.cart') }}"><b>Giỏ hàng
-                                        </b><i class="fa-solid fa-cart-shopping ms-1">
-                                            @if (session('cart') && Auth::guard('customer')->check())
-                                            <span
-                                                class="position-absolute top-0 ms-2 translate-middle badge rounded-pill bg-danger">{{
-                                                $total }}
-                                            </span>
-                                            @endif
-                                        </i>
-
-
-                                    </a>
-                                </li>
+                               
                         </div>
                     </div>
 
@@ -278,55 +265,6 @@ $product = product::select()->get();
             flex: 3;
         }
     </style>
-
-    <!--
-<div class="menu-phone" >
-    <div><a href="index1.html">Trang chủ </a></div>
-    <div><a href="about.html">Giới thiệu  </a></div>
-    <div><a href="service.html">Dịch vụ </a></div>
-    <div><a href="product.html">Sản phẩm </a></div>
-    <div><a href="booking.html">Đặt lịch </a></div>
-    <div><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i>Giỏ hàng</a></div>
-</div>-->
-    <!--header end-->
-
-    <!--footer-->
-
-    <div class="container-fluid d-flex justify-content-around flex-wrap bg-dark mt-5">
-        <div class="footer1 d-flex align-items-center flex-column p-3">
-            <h1 class="mb-3 mt-4  text-capitalize" style="color:#F7A98F;font-size:4vw">PetCare</h1>
-            <p class="text-white" style="font-size: 1.2vw">Giờ hoạt động: 8AM-10PM</p>
-        </div>
-        <div class="footer2 mt-3 text-white d-flex flex-column justify-content-between p-3">
-            <h3 style="font-size: 2vw">Get in touch</h3>
-            <span>
-                <h6><i class="fa-solid fa-envelope-circle-check fa-lg me-3"
-                        style="color: #ffffff;font-size:2vw"></i>petcare@gmail.com
-                </h6>
-            </span>
-            <span>
-                <h6><i class="fa-solid fa-phone fa-lg me-4" style="color: #ffffff;font-size:2vw"></i>0912345678</h6>
-            </span>
-            <span>
-                <h6><i class="fa-solid fa-location-dot fa-lg me-4" style="color: #ffffff;font-size:2vw"></i>Láng
-                    Thượng, Đống Đa, Hà
-                    Nội
-                </h6>
-            </span>
-        </div>
-        <div class="footer3 d-flex text-white flex-column mt-3 p-3 text-center">
-            <h3 style="font-size: 2vw">Popular links</h3>
-            <a href="#" class="mb-4"><i class="fa-brands fa-facebook fa-lg me-3 "
-                    style="color: #ffffff;font-size:2vw"></i></a>
-            <a href="#" class="mb-4"><i class="fa-brands fa-instagram fa-lg me-3"
-                    style="color: #ffffff;font-size:2vw"></i></a>
-            <a href="#" class="mb-4"><i class="fa-brands fa-youtube fa-lg me-3"
-                    style="color: #ffffff;font-size:2vw"></i></a>
-        </div>
-
-    </div>
-
-    <!--footer end-->
 </body>
 <script href="{{ asset('assets/js/script.js') }}"></script>
 

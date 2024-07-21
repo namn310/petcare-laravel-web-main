@@ -15,6 +15,7 @@
   </script>
   @endif
   <div class="main-content mt-4">
+    
     <div class=" d-flex flex-wrap justify-content-around">
 
       <div class="widget d-flex mb-4"
@@ -66,10 +67,11 @@
     <div class="chart mt-5">
       <h3 class="mb-3 text-center">Thống kê doanh thu</h3>
 
-      <canvas id="plots" style="width:100%;max-width:1000px"></canvas>
+      <canvas id="plots" style="width:100%"></canvas>
     </div>
 
   </div>
+
 
 </div>
 

@@ -56,11 +56,12 @@
         })
 </script>
 <!-- Danh mục sản phẩm-->
-<div class="container-fluid pdt">
+<div class="container-fluid pdt productDetail">
+
   <div class="row a ">
     <div>
       <nav class="navbar mb-3 navbar-light bg-light justify-content-between">
-        <h3 style="color:black"></h3>
+
         <form class="form-inline d-flex">
           <!-- <input class="form-control mr-sm-2" type="text" id="nameProductSearch" placeholder="Search" aria-label="Search"> -->
           <!-- <button class="btn btn-outline-success my-2 my-sm-0 ml-3" id="buttonSearch" type="button">Search</button> -->
@@ -122,16 +123,16 @@
           <div class="product-detail-intro ms-5 text-break">
             <p>
               {{-- Tên sản phẩm --}}
-            <h4>
+            <h4 style="font-size:3vw;font-size:3vh">
               {{ $row->namePro }}
             </h4>
             </p>
             {{-- Mã sản phẩm --}}
-            <p><strong>Mã sản phẩm : </strong>
+            <p style="font-size:2vw;font-size:2vh"><strong>Mã sản phẩm : </strong>
               {{ $row->idPro }}
             </p>
-            <p><strong>Lượt mua: </strong>324</p>
-            <span class="rating secondary-font">
+            <p style="font-size:2vw;font-size:2vh"><strong>Lượt mua: </strong>324</p>
+            <span class="rating secondary-font" style="font-size:3vw;font-size:3vh">
               <i class="fa-solid fa-star text-warning"></i>
               <i class="fa-solid fa-star text-warning"></i>
               <i class="fa-solid fa-star text-warning"></i>
@@ -139,9 +140,10 @@
               <i class="fa-solid fa-star text-warning"></i>
               5.0</span>
             @if (!$row->discount > 0)
-            <p><b>Giá:</b><span class="card-text text-danger"> {{ number_format($row->cost) }}đ</span></p>
+            <p style="font-size:3vw;font-size:3vh"><span class="card-text text-danger"> {{
+                number_format($row->cost) }}đ</span></p>
             @else
-            <p>
+            <p style="font-size:3vw;font-size:3vh">
               <span>
                 <b class="card-text text-black text-decoration-line-through"
                   style="border-right:solid black 1px;padding-right:5px">{{ number_format($row->cost) }}
@@ -154,14 +156,16 @@
 
             <!-- Button trigger modal -->
             @if ($row->count > 0)
-            <button type="button" style="width:20% ;margin-left:10px;margin-bottom:20px" id="cartSucess"
+            <button type="button" style="width:150px ;margin-left:10px;margin-bottom:20px" id="cartSucess"
               class="btn btn-danger mt-3">
-              <a style="text-decoration:none;color:white" href="{{ route('user.add', ['id' => $row->idPro]) }}">
+              <a style="text-decoration:none;color:white;font-size:2vw;font-size:2vh"
+                href="{{ route('user.add', ['id' => $row->idPro]) }}">
                 Mua
               </a></button>
+              
             @else
-            <button type="button" style="width:20% ;margin-left:10px;margin-bottom:20px" id="cartSucess"
-              class="btn btn-danger mt-3">
+            <button type="button" style="width:150px ;margin-left:10px;margin-bottom:20px;font-size:2vw;font-size:2vh"
+              id="cartSucess" class="btn btn-danger mt-3">
               Hàng tạm hết</button>
             @endif
           </div>
@@ -171,20 +175,24 @@
       <div class="mt-3">
         <ul class="nav nav-tabs" style="cursor:pointer">
           <li class="nav-item" style="font-weight:bold">
-            <a class="nav-link" id="mota" style="text-decoration:none;color:black" aria-current="page">Mô tả sản
+            <a class="nav-link" id="mota" style="text-decoration:none;color:black;font-size:2vw;font-size:2vh"
+              aria-current="page">Mô
+              tả
+              sản
               phẩm</a>
           </li>
           <li class="nav-item" style="font-weight:bold">
-            <a class="nav-link" id="comment" style="text-decoration:none;color:black">Bình luận</a>
+            <a class="nav-link" id="comment" style="text-decoration:none;color:black;font-size:2vw;font-size:2vh">Bình
+              luận</a>
           </li>
         </ul>
         <!-- Mô tả sản phẩm -->
-        <div class="thongtinchitiet mt-3 ms-4" style="padding-bottom:50px">
+        <div class="thongtinchitiet mt-3 ms-4" style="padding-bottom:50px;font-size:2vw;font-size:2vh">
           <?php echo $row->description; ?>
 
         </div>
         <!--  Bình luận sản phẩm -->
-        <div class="comment mt-3">
+        <div class="comment container mt-3">
           <!--           <iframe style="width:100%" src="../../Project-petcare-php/user/Views/Comment.php"></iframe>
      -->
           @if (Auth::guard('customer')->check())
@@ -192,16 +200,19 @@
           <form method="post" action="{{ route('user.comment', ['id' => $row->idPro]) }}">
             @csrf
             @method('post')
-            <input placeholder="Nhập bình luận của bạn" style="width:100%;border-radius:10px;height:50px" name="comment"
-              required>
-            <button class="btn btn-primary mt-3 float-end" type="submit">Bình luận</button>
+            <input placeholder="Nhập bình luận của bạn"
+              style="width:100%;border-radius:10px;height:70px;font-size:2vw;font-size:2vh" name="comment" required>
+            <div>
+              <button class="btn btn-primary mt-3 float-end" style="font-size:2vw;font-size:2vh" type="submit">Bình
+                luận</button>
+            </div>
           </form>
           @else
-          <a href="{{ route('user.login') }}">Hãy đăng nhập để có thể bình luận</a>
+          <a style="font-size:2vw;font-size:2vh" href="{{ route('user.login') }}">Hãy đăng nhập để có thể bình luận</a>
           @endif
           <!-- Danh sách các bình luận -->
           {{-- @if (Auth::guard('customer')->check()) --}}
-          <div class="container" style="width:70%;height:300px;margin-top:20px;overflow-y:auto;overflow-x:hidden">
+          <div style="width:100%;height:300px;margin-top:20px;overflow-y:auto;overflow-x:hidden;font-size:20px">
             <div class="list-comment mt-5" style="background-color:#EEEEEE;border-radius:6px" width="80%">
               @foreach ($comment as $cmt)
               <div class="d-flex mt-3 ms-5">
@@ -214,10 +225,11 @@
 
                 <div class=""
                   style="margin-bottom:20px;box-shadow: 2px 2px 2px gray;margin-top:10px;background-color:#FFFFFF;border-radius:10px;width:60%">
-                  <span style="font-weight:bold;font-size:15px;color:blue" class="user-name">{{
+                  <span style="font-weight:bold;font-size:1.5vw;font-size:1.5vh;color:blue" class="user-name">{{
                     $cmt->getNameUser($cmt->idCus) }}</span>
-                  <span style="font-weight:lighter" class="comment-time">{{ $cmt->created_at }}</span>
-                  <div style="margin-left:40px" class="noidung">{{ $cmt->title }}</div>
+                  <span style="font-weight:lighter;font-size:2vw;font-size:2vh" class="comment-time">{{ $cmt->created_at
+                    }}</span>
+                  <div style="margin-left:40px;font-size:2vw;font-size:2vh" class="noidung">{{ $cmt->title }}</div>
                   <br>
                 </div>
               </div>

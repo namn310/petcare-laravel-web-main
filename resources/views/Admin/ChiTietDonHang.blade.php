@@ -2,14 +2,14 @@
 @section('content')
 <div class="pagetitle">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb" style="font-size: 22px;">
+        <ol class="breadcrumb" style="font-size:2vw;font-size:2vh">
             <li class="breadcrumb-item"><a href="{{ route('admin.order') }}">Danh sách đơn hàng</a></li>
             <li class="breadcrumb-item active" aria-current="page">Xem chi tiết</li>
         </ol>
     </nav>
 
 </div><!-- End Page Title -->
-<div class="container-fluid border border-primary rounded">
+<div class="container-fluid border border-primary rounded" style="font-size:2vw;font-size:2vh">
     @foreach ($Order as $order )
     <div class="p-4">
         <div class="name d-inline-block">
@@ -36,20 +36,17 @@
             <span>
                 <p>Trạng thái </p>
                 @if ($order->status >0)
-                <button class="btn btn-success">Đã giao hàng</button>
+                <button style="font-size:2vw;font-size:2vh" class="btn btn-success">Đã giao hàng</button>
                 @else
-                <button class="btn btn-danger">Chưa giao hàng</button>
+                <button style="font-size:2vw;font-size:2vh" class="btn btn-danger">Chưa giao hàng</button>
                 @endif
-
-
-
 
             </span>
         </div>
         <div class="order-detail mt-4">
             <table class="table table-bordered table-hover text-center">
                 <tr>
-                    <th style="width: 100px;">Ảnh</th>
+                    <th>Ảnh</th>
                     <th>Sản phẩm</th>
                     <th>Giá</th>
                     <th>Giảm giá</th>
@@ -61,7 +58,7 @@
                 <tr>
                     <td>
                         <img class="img-fluid" src="{{ asset('assets/img-add-pro/'.$row->getImgProduct($row->idPro)) }}"
-                            style="">
+                            style="max-width:200px">
                     </td>
                     <td>
                         {{ $row->getProductName($row->idPro) }}

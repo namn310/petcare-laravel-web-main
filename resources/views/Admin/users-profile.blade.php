@@ -26,9 +26,9 @@
   </script>
 
   @endif
-  <h1>Trang cá nhân</h1>
+  <h1 style="font-size:3vw;font-size:3vh">Trang cá nhân</h1>
   <nav>
-    <ol class="breadcrumb">
+    <ol class="breadcrumb" style="font-size:2vw;font-size:2vh">
       <li class="breadcrumb-item"><a href="{{ route('admin.home') }}">Home</a></li>
       <li class="breadcrumb-item">Users</li>
     </ol>
@@ -63,7 +63,7 @@
       <div class="card">
         <div class="card-body pt-3">
           <!-- Bordered Tabs -->
-          <ul class="nav nav-tabs nav-tabs-bordered">
+          <ul class="nav nav-tabs nav-tabs-bordered" style="font-size:2vw;font-size:2vh">
 
             <li class="nav-item">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Cài đặt</button>
@@ -83,7 +83,7 @@
             <div class="tab-pane fade pt-3" id="profile-settings">
               <!-- Settings Form -->
               <form>
-                <div class="row mb-3">
+                <div class="row mb-3" style="font-size:2vw;font-size:2vh">
                   <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Thông báo Email</label>
                   <div class="col-md-8 col-lg-9">
                     <div class="form-check">
@@ -105,7 +105,7 @@
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="securityNotify" checked disabled>
+                      <input class="form-check-input" type="checkbox" id="securityNotify" checked >
                       <label class="form-check-label" for="securityNotify">
                         Thông báo hệ thống
                       </label>
@@ -113,8 +113,8 @@
                   </div>
                 </div>
 
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Lưu</button>
+                <div class="text-center" >
+                  <button type="submit" style="font-size:2vw;font-size:2vh" class="btn btn-primary">Lưu</button>
                 </div>
               </form><!-- End settings Form -->
 
@@ -122,7 +122,7 @@
 
             <div class="tab-pane fade pt-3" id="profile-change-password">
               <!-- Change Password Form -->
-              <form method="post" action="{{ route('admin.changePass') }}">
+              <form method="post" style="font-size:2vw;font-size:2vh" action="{{ route('admin.changePass') }}">
                 @csrf
                 @method('post')
                 <div class="row mb-3">
@@ -152,7 +152,7 @@
                 </div>
 
                 <div class="text-center">
-                  <button type="submit" name="changePassAdmin" class="btn btn-primary">Đổi mật khẩu</button>
+                  <button type="submit" name="changePassAdmin" style="font-size:2vw;font-size:2vh" class="btn btn-primary">Đổi mật khẩu</button>
                 </div>
               </form><!-- End Change Password Form -->
 
@@ -160,13 +160,13 @@
             {{-- account detail --}}
             <div class="tab-pane fade pt-3" id="profile">
 
-              <form method="post" action="{{ route('admin.updateProfile') }}">
+              <form style="font-size:2vw;font-size:2vh"  method="post" action="{{ route('admin.updateProfile') }}">
                 @csrf
                 @method('post')
                 <div class="row mb-3">
                   <label for="name" class="col-md-4 col-lg-3 col-form-label">Họ và tên</label>
                   <div class="col-md-8 col-lg-9">
-                    <input name="name" value="{{ Auth::user()->name }}" type="text" class="form-control" id="name"
+                    <input style="font-size:2vw;font-size:2vh" name="name" value="{{ Auth::user()->name }}" type="text" class="form-control" id="name"
                       required>
                     @error('name')
                     <small class="text-danger">{{ $message }}</small>
@@ -176,7 +176,7 @@
                 <div class="row mb-3">
                   <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                   <div class="col-md-8 col-lg-9">
-                    <input name="email" type="email" value="{{ Auth::user()->email }}" class="form-control" id="email"
+                    <input style="font-size:2vw;font-size:2vh" name="email" type="email" value="{{ Auth::user()->email }}" class="form-control" id="email"
                       required>
                     @error('email')
                     <small class="text-danger">{{ $message }}</small>
@@ -184,7 +184,7 @@
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="submit" name="changePassAdmin" class="btn btn-primary">Cập nhật thông tin</button>
+                  <button type="submit" style="font-size:2vw;font-size:2vh" name="changePassAdmin" class="btn btn-primary">Cập nhật thông tin</button>
                 </div>
               </form><!-- End Change Password Form -->
 

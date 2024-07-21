@@ -13,7 +13,22 @@
 </style>
 <div class="productViewUser">
   <!-- Danh mục sản phẩm-->
-  <div class="container-fluid pdt">
+
+  <div class="container-fluid">
+
+    <div class="SmallCategory">
+      <div class="dropdown mb-2">
+        <a class="btn btn-info dropdown-toggle" role="button" data-bs-toggle="dropdown">
+          Danh mục
+        </a>
+        <ul class="dropdown-menu">
+          @foreach ($category as $row )
+          <li><a class="dropdown-item" href="{{route('user.product', ['id' => $row->idCat])  }}">{{ $row->name }}</a>
+          </li>
+          @endforeach
+        </ul>
+      </div>
+    </div>
     <div class="d-flex">
       <div class="MenuCat">
         {{-- <a href="{{ route('user.destroyCart') }}">click</a> --}}

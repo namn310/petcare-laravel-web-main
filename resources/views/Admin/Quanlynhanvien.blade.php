@@ -12,7 +12,7 @@
                               })
     </script>
     @endif
-    <h1>Quản lý nhân viên</h1>
+    <h1 style="font-size:2.5vw;font-size:2.5vh">Quản lý nhân viên</h1>
     <!-- End Page Title -->
     <div class="row">
         <div class="col-md-12">
@@ -21,20 +21,20 @@
 
                     <div class="button-function d-flex justify-content-between mt-3 mb-4" style="width:70%">
 
-                        <button id="uploadfile" class="btn btn-success" type="button" title="Nhập"><a id="addnhanvien"
+                        <button style="font-size:2vw;font-size:2vh" id="uploadfile" class="btn btn-success" type="button" title="Nhập"><a id="addnhanvien"
                                 href="{{ route('admin.staffCreate') }}"><i class="fas fa-plus"></i>>
                                 Tạo mới nhân viên</a></button>
 
                     </div>
-                    <div class="search mt-4 mb-4 input-group" style="width:50%">
-                        <button class="input-group-text btn btn-success"><i
+                    <div  class="search mt-4 mb-4 input-group" style="width:50%">
+                        <button style="font-size:2vw;font-size:2vh" class="input-group-text btn btn-success"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                         <input class="form-control" type="text" id="searchNV">
                     </div>
 
 
 
-                    <table class="table table-hover table-bordered text-center" cellpadding="0" cellspacing="0"
+                    <table style="font-size:2vw;font-size:2vh" class="table table-hover table-bordered text-center" cellpadding="0" cellspacing="0"
                         border="0" id="sampleTable">
                         <thead>
                             <tr class="table-primary">
@@ -76,7 +76,7 @@
                                 <td>{{ $row->chucvu }}</td>
                                 <td class="table-td-center">
                                     {{-- button xóa --}}
-                                    <button class="btn btn-danger btn-sm trash" data-bs-toggle="modal"
+                                    <button style="font-size:2vw;font-size:2vh" class="btn btn-danger btn-sm trash" data-bs-toggle="modal"
                                         data-bs-target="#delete{{ $row->id }}" type="button" title="Xóa">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
@@ -107,7 +107,7 @@
                                         </div>
                                     </div>
                                     {{-- Button sửa --}}
-                                    <a href="{{ route('admin.staffEdit',['id'=>$row->id]) }}"><button
+                                    <a href="{{ route('admin.staffEdit',['id'=>$row->id]) }}"><button style="font-size:2vw;font-size:2vh"
                                             class="btn btn-success btn-sm edit" type="button" title="Sửa" id="show-emp"
                                             data-bs-toggle="modal">
                                             <i class="fas fa-edit"></i>

@@ -34,6 +34,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('test1', function () {
+//     return view('Admin.Home');
+// });
 Route::get('test', [TestController::class, 'index'])->name('User.test');
 Route::post('test', [TestController::class, 'store'])->name('test.store');
 //user view

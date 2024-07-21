@@ -1,7 +1,7 @@
 @extends('Admin.Layout')
 @section('content')
 <div class="pagetitle">
-    <h1>Danh Sách lịch hẹn</h1>
+    <h1 style="font-size:2vw;font-size:2vh">Danh Sách lịch hẹn</h1>
 
 </div><!-- End Page Title -->
 @if (session('notice'))
@@ -30,7 +30,7 @@
     <div class="row">
         <div class="search mt-4 mb-4 input-group" style="width:50%">
             <button class="input-group-text btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <input class="form-control" type="text" id="searchOrders">
+            <input style="font-size:2vw;font-size:2vh" class="form-control" type="text" id="searchOrders">
         </div>
         <div class="col-lg-12">
 
@@ -38,7 +38,7 @@
                 <div class="card-body table-responsive">
 
                     <!-- Table with stripped rows -->
-                    <table class="table text-center table-bordered">
+                    <table style="font-size:2vw;font-size:2vh" class="table text-center table-bordered">
                         <thead>
 
                             <tr>
@@ -59,19 +59,19 @@
                                 <td>{{ $row->date }}</td>
                                 <td>{{ $row->goi }}</td>
                                 @if ($row->status > 0)
-                                <td><button class="btn btn-success">Đã duyệt</button></td>
+                                <td><button style="font-size:2vw;font-size:2vh" class="btn btn-success">Đã duyệt</button></td>
                                 @else
-                                <td><button class="btn btn-danger">Chưa duyệt</button></td>
+                                <td><button style="font-size:2vw;font-size:2vh" class="btn btn-danger">Chưa duyệt</button></td>
                                 @endif
 
                                 @if ($row->status > 0)
                                        <td class="d-flex justify-content-between flex-wrap">
                                     {{-- detail book --}}
                                     <a style="text-decoration:none"
-                                        href="{{ route('admin.bookDetail',['id'=>$row->id]) }}"><button
+                                        href="{{ route('admin.bookDetail',['id'=>$row->id]) }}"><button style="font-size:2vw;font-size:2vh"
                                             class="btn btn-secondary"><i class="fa-solid fa-bars"></i></button></a>
                                     {{-- confirm book --}}
-                                    <a style="text-decoration:none" class="ms-2"><button data-bs-toggle="modal"
+                                    <a style="text-decoration:none" class="ms-2"><button style="font-size:2vw;font-size:2vh" data-bs-toggle="modal"
                                             data-bs-target="#confirm{{ $row->id }}" class="btn btn-primary"><i
                                                 class="fa-solid fa-check"></i></button></a>
                                     {{-- modal confirm book --}}
@@ -99,7 +99,7 @@
                                     </div>
                                     {{-- unconfirm book --}}
                                     <a style="text-decoration:none" class="ms-2"
-                                       ><button
+                                       ><button style="font-size:2vw;font-size:2vh"
                                             class="btn btn-warning" data-bs-toggle="modal"
                                             data-bs-target="#unconfirm{{ $row->id }}"><i
                                                 class="fa-solid fa-circle-notch"></i></button></a>

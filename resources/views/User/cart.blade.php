@@ -36,198 +36,217 @@
 </script>
 @endif
 <div class="container-fluid cartView" style="height:max-height">
+  {{-- cartSmallView --}}
+  <div class="cartSmallView mt-2">
+    <section class="h-100" style="background-color: #d2c9ff;margin-bottom:50px">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12">
+            <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+              <div class="card-body p-0">
+                <div class="row g-0">
+                  <div class="col-lg-8">
+                    <form method="post" action="{{ route('user.cartupdate') }}">
+                      @csrf
+                      <div class="p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-5">
+                          <h3 class="fw-bold mb-0">Shopping Cart <i class="fa-solid fa-cart-plus"></i></h3>
+                          <h6 class="mb-0 text-muted">{{ $cartCount }} sản phẩm</h6>
+                        </div>
+                        <hr class="my-4">
+                        @foreach ($cartItem as $row )
+                        <div class="row mb-4 d-flex justify-content-between align-items-center">
+                          <div class="col-md-2 col-lg-2 col-xl-3">
+                            <img src="{{ asset('assets/img-add-pro/'.$row['image']) }}" class="img-fluid rounded-3"
+                              alt="Cotton T-shirt">
+                          </div>
+                          <div class="col-md-3 col-lg-3 col-xl-3">
+                            {{-- <h6 class="text-muted">Shirt</h6> --}}
+                            <h6 class="mb-0"><input value="{{ $row['idPro'] }}" name="id{{ $row['idPro'] }}" hidden>
+                              {{ $row['name'] }}</h6>
+                          </div>
+                          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                            <input style="width:30%" type="number" name="idPro{{ $row['idPro'] }}"
+                              id="idPro{{ $row['idPro'] }}" min="1" value="{{ $row['count'] }}"
+                              required="không để trống">
 
-  <div class="table-responsive">
-    <h3 class="text-center text-header" style="color:#EA9E1E">GIỎ HÀNG <i class="fa-solid fa-cart-arrow-down"
-        style="color:red"></i></h3>
-    <form method="post" action="{{ route('user.cartupdate') }}">
-      @csrf
-      @if (session('cart'))
-      <table class="table table-bordered align-middle text-center  p-3">
-        <thead>
-          <th class="image-fluid img">Ảnh sản phẩm</th>
-          <th class="name">Tên sản phẩm</th>
-          <th class="price">Giá</th>
-          <th>Giảm giá</th>
-          <th class="quantity">Số lượng</th>
-          <th class="price">Thành tiền</th>
-          <th></th>
-        </thead>
+                          </div>
+                          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                            @if ($row['discount']>0)
+                            <h6 class="mb-0">{{ number_format($row['count'] * ($row['cost'] - ($row['cost'] *
+                              $row['discount']) / 100))
+                              }}₫</h6>
+                            @else
+                            <h6 class="mb-0">{{ number_format($row['count'] * ($row['cost']))}}đ</h6>
+                            @endif
 
-        <!-- Nếu có giỏ hàng thì hiện ra -->
-        <tbody>
-          <!-- Danh sách giỏ hàng -->
-          @foreach ($cartItem as $cart )
-          {{-- <form method="post"> --}}
-            <tr>
-              <td>
-                <img style="max-width:200px" class="image-fluid img"
-                  src="{{ asset('assets/img-add-pro/'.$cart['image']) }}">
-              </td>
+                          </div>
+                          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                            <a href="{{ route('user.delete',['id'=>$row['idPro']]) }}" class="text-muted"><i
+                                class="fas fa-times"></i></a>
+                          </div>
+                        </div>
 
-              <td>
-                <input value="{{ $cart['idPro'] }}" name="id{{ $cart['idPro'] }}" hidden>
-                {{ $cart['name'] }}
-              </td>
+                        <hr class="my-4">
 
-              <td>
-                {{number_format($cart['cost'])}}đ
-              </td>
-              <td>
-                {{$cart['discount']}}%
-              </td>
+                        @endforeach
+                        <div class="pt-3 text-end">
+                          <button type="submit" class="btn btn-dark"><i class="fa-solid fa-box-archive"></i> Cập nhật
+                          </button>
+                        </div>
+                        <div class="pt-2">
+                          <h6 class="mb-0"><a href="{{ route('user.home') }}" class="text-body"><i
+                                class="fas fa-long-arrow-alt-left me-2"></i>Back
+                              to shop</a></h6>
 
-              <td class="">
-                <input style="width:30%" type="number" name="idPro{{ $cart['idPro'] }}" id="idPro{{ $cart['idPro'] }}"
-                  min="1" value="{{ $cart['count'] }}" required="không để trống">
-              </td>
-              @if ($cart['discount']>0)
-              <td>
-                <p><b>
-                    {{ number_format($cart['count'] * ($cart['cost'] - ($cart['cost'] * $cart['discount']) / 100))
-                    }}₫
-                  </b></p>
-              </td>
-              @else
-              <td>
-                <p><b>
-                    {{ number_format($cart['count'] * ($cart['cost']))}}đ
-                  </b></p>
-              </td>
-              @endif
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  @if(session('cart'))
+                  <div class="col-lg-4 bg-body-tertiary">
+                    <div class="p-5">
+                      <h3 class="fw-bold mb-5 mt-2 pt-1">Summary</h3>
+                      <hr class="my-4">
 
-              <td>
-                <a class="text-danger" href="{{ route('user.delete',['id'=>$cart['idPro']]) }}"><i
-                    class="fa fa-trash"></i></a>
-              </td>
-            </tr>
-            @endforeach
-        </tbody>
-        <tr class="mt-2">
-          {{-- Button destroy cart --}}
-          <td colspan="4"><button type="button" class="btn btn-danger" data-bs-toggle="modal"
-              data-bs-target="#destroyCart" class="btn btn-danger"><a style="text-decoration:none;color:white">Xóa
-                toàn
-                bộ</a></button></td>
-          <!-- Modal destroy cart -->
-          <div class="modal fade" id="destroyCart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Thông báo</h1>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  Bạn có chắc chắn xóa giỏ hàng không ?
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                  <button type="button" class="btn btn-danger"><a style="text-decoration:none;color:white"
-                      href="{{ route('user.destroyCart') }}">Đồng ý </a></button>
+                      {{-- <div class="d-flex justify-content-between mb-4">
+                        <h5 class="text-uppercase">items 3</h5>
+                        <h5>€ 132.00</h5>
+                      </div> --}}
+
+                      {{-- <h5 class="text-uppercase mb-3">Shipping</h5>
+
+                      <div class="mb-4 pb-2">
+                        <select data-mdb-select-init>
+                          <option value="1">Standard-Delivery- €5.00</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                          <option value="4">Four</option>
+                        </select>
+                      </div> --}}
+
+                      <h5 class="text-uppercase mb-3">Voucher</h5>
+
+                      <div class="mb-5">
+                        <div data-mdb-input-init class="form-outline">
+                          <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
+                          <label class="form-label" for="form3Examplea2">Enter your code</label>
+                        </div>
+                      </div>
+
+                      <hr class="my-4">
+
+                      <div class="d-flex justify-content-between mb-5">
+                        <h5 class="text-uppercase">Tổng tiền</h5>
+                        <h5>{{ number_format($cartTotal) }}đ</h5>
+                      </div>
+
+                      <a style="text-decoration:none;color:white" href="{{ route('user.checkout') }}"><button class="buttonThanhToan"
+                          type="button"><span class="shadow"></span>
+                          <span class="edge"></span>
+                          <span class="front text"> Thanh toán
+                          </span></button></a>
+
+                    </div>
+                  </div>
+                  @endif
                 </div>
               </div>
             </div>
           </div>
-          <td> <a href="{{ route('user.home') }}" style="text-decoration:none ;color:white" class="btn btn-primary">Tiếp
-              tục mua
-              hàng</a></td>
-          {{-- button update count --}}
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <style>
+    @media (min-width: 1025px) {
+      .h-custom {
+        height: 100vh !important;
+      }
+    }
+
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+      font-size: 1rem;
+      line-height: 2.15;
+      padding-left: .75em;
+      padding-right: .75em;
+    }
+
+    .card-registration .select-arrow {
+      top: 13px;
+    }
+  </style>
+</div>
+
+
+{{--
+<div class="booking mt-5 mb-4 text-center">
+  <h3 style="color:#EA9E1E">ĐẶT LỊCH</h3>
+  <i class="container">Nếu bạn muốn sửa thông tin lịch đã đặt thì bấm sửa để thay đổi lịch hẹn! Sau khi chúng tôi nhận
+    được thông báo đặt lịch nhân viên sẽ liên hệ với bạn. Vui lòng thanh toán với nhân viên để bảo đảm việc đặt lịch
+    !</i>
+  <i>Nếu khách hàng có nhu cầu thay đổi lịch hẹn sau khi lịch hẹn đã được phê duyệt, xin vui lòng liên hệ với chúng tôi
+    qua <b>hotline: 012345678</b> để được hỗ trợ</i>
+  <div class="container-fluid">
+
+    <table class="table table-bordered align-middle text-center  p-3">
+      <thead>
+        <th>Tên Boss</th>
+        <th>Loại</th>
+        <th>Tên dịch vụ</th>
+        <th>Tên gói</th>
+        <th>Cân nặng của Boss</th>
+        <th>Lịch đặt</th>
+        <th class="text-center d-flex flex-wrap"></th>
+      </thead>
+
+      <tbody class="booking-detail text-center">
+
+
+        <tr>
+
           <td>
-            <button type="submit" class="btn btn-success">Cập nhật</button>
+
+            <input class="form-control" name="Bossname" value="">
+
           </td>
+          <td>
+            <input class="form-control" name="Bosstype" value=" ">
+          </td>
+          <td>
+            <input class="form-control" name="dichvu" value=" ">
+          </td>
+          <td>
+            <input class="form-control" name="goi" value="">
+          </td>
+          <td>
+            <input class="form-control" name="weight" value="">
+          </td>
+          <td>
+            <input class="form-control" name="date" value="">
+          </td>
+          <td class="text-center d-flex flex-wrap justify-content-around">
+
+          <th><button class="btn btn-success">Đã duyệt</button></th>
+
+          <a name="changeBook" href="index.php?controller=book&action=change&id=" class="changeBook"
+            style="text-decoration:none"> <button type="submit" class="btn btn-primary">Sửa</button>
+            <a class="mt-2" href="index.php?controller=book&action=delete&id=" style="text-decoration:none"> <button
+                class="btn btn-danger ms-1" name="deleteBook">Xóa</button></a>
+
+            </td>
 
         </tr>
 
+      </tbody>
+    </table>
 
-      </table>
-    </form>
-  </div>
-
-  <!-- Tính tiền giỏ hàng -->
-
-
-  <div class="total-cart mb-3 text-end">
-    <h4 class="text-end">Tổng tiền thanh toán:
-      {{ number_format($cartTotal)}}đ
-    </h4> <br>
-
-    <a style="text-decoration:none;color:white" href="{{ route('user.checkout') }}"><button
-        class="btn btn-primary">Thanh toán</button></a>
 
   </div>
 
-  @endif
-</div>
+</div> --}}
 
-<br>
-<div>
-  <hr>
-</div>
-
-
-<!-- Nếu có danh sách lịch hiện thì sẽ hiện ra ở đây
-
-  <div class="booking mt-5 mb-4 text-center">
-    <h3 style="color:#EA9E1E">ĐẶT LỊCH</h3>
-    <i class="container">Nếu bạn muốn sửa thông tin lịch đã đặt thì bấm sửa để thay đổi lịch hẹn! Sau khi chúng tôi nhận được thông báo đặt lịch nhân viên sẽ liên hệ với bạn. Vui lòng thanh toán với nhân viên để bảo đảm việc đặt lịch !</i>
-    <i>Nếu khách hàng có nhu cầu thay đổi lịch hẹn sau khi lịch hẹn đã được phê duyệt, xin vui lòng liên hệ với chúng tôi qua <b>hotline: 012345678</b> để được hỗ trợ</i>
-    <div class="container-fluid">
-
-      <table class="table table-bordered align-middle text-center  p-3">
-        <thead>
-          <th>Tên Boss</th>
-          <th>Loại</th>
-          <th>Tên dịch vụ</th>
-          <th>Tên gói</th>
-          <th>Cân nặng của Boss</th>
-          <th>Lịch đặt</th>
-          <th class="text-center d-flex flex-wrap"></th>
-        </thead>
-
-        <tbody class="booking-detail text-center">
-
-       
-            <tr>
-
-              <td>
-
-                <input class="form-control" name="Bossname" value="">
-
-              </td>
-              <td>
-                <input class="form-control" name="Bosstype" value=" ">
-              </td>
-              <td>
-                <input class="form-control" name="dichvu" value=" ">
-              </td>
-              <td>
-                <input class="form-control" name="goi" value="">
-              </td>
-              <td>
-                <input class="form-control" name="weight" value="">
-              </td>
-              <td>
-                <input class="form-control" name="date" value="">
-              </td>
-              <td class="text-center d-flex flex-wrap justify-content-around">
-             
-              <th><button class="btn btn-success">Đã duyệt</button></th>
-        
-              <a name="changeBook" href="index.php?controller=book&action=change&id=" class="changeBook" style="text-decoration:none"> <button type="submit" class="btn btn-primary">Sửa</button>
-                <a class="mt-2" href="index.php?controller=book&action=delete&id=" style="text-decoration:none"> <button class="btn btn-danger ms-1" name="deleteBook">Xóa</button></a>
-
-              </td>
-
-            </tr>
-
-        </tbody>
-      </table>
-
-
-    </div>
-
-  </div>
- -->
 <script>
   $(document).ready(function() {
     $(".formChangeBook").hide();
@@ -237,74 +256,9 @@
   })
 </script>
 
-
-
 <div class="container-fluid text-center">
   <img class="img-fluid" src="{{ asset('assets/img/618lwjSdN6L._AC_UF1000,1000_QL80_.jpg') }}">
 </div>
-<style>
-  .booking-detail input {
-    border: none;
-  }
-</style>
-<!--footer end-->
+
 <script src="{{ asset('assets/js/script.js') }}"></script>
-
-{{-- <script>
-  $('.checkout').click(function() {
-    if (confirm('Xử lý đơn hàng thành công')) {
-      window.location.href = 'index.php?controller=cart&action=checkout';
-    }
-  })
-</script> --}}
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script> --}}
-{{-- <script>
-  $(document).ready(function() {
-    $("#thanhtoan").click(function() {
-      $("#pay-form").toggle();
-    })
-  })
-</script> --}}
-{{-- <script>
-  var citis = document.getElementById("city");
-  var districts = document.getElementById("district");
-  var wards = document.getElementById("ward");
-  var Parameter = {
-    url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
-    method: "GET",
-    responseType: "application/json",
-  }
-  var promise = axios(Parameter);
-  promise.then(function(result) {
-    renderCity(result.data);
-  })
-
-  function renderCity(data) {
-    for (const x of data) {
-      citis.options[citis.options.length] = new Option(x.Name, x.Id);
-    }
-    citis.onchange = function() {
-      district.length = 1;
-      ward.length = 1;
-      if (this.value != "") {
-        const result = data.filter(n => n.Id === this.value);
-
-        for (const k of result[0].Districts) {
-          district.options[district.options.length] = new Option(k.Name, k.Id);
-        }
-      }
-    }
-    district.onchange = function() {
-      ward.length = 1;
-      const dataCity = data.filter((n) => n.Id === citis.value);
-      if (this.value != "") {
-        const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
-
-        for (const w of dataWards) {
-          wards.options[wards.options.length] = new Option(w.Name, w.Id);
-        }
-      }
-    }
-  }
-</script> --}}
 @endsection

@@ -1,7 +1,7 @@
 @extends('Admin.Layout')>
 @section('content')
 <div class="pagetitle">
-  <h1>Quản lý dịch vụ</h1>
+  <h1 style="font-size:2vw;font-size:2vh">Quản lý dịch vụ</h1>
   <!-- End Page Title -->
   <div class="row">
     <div class="col-md-12">
@@ -25,15 +25,15 @@
           @endif
           <div class="button-function d-flex justify-content-between mt-3 mb-4" style="width:70%">
 
-            <button id="uploadfile" class="btn btn-success" type="button" title="Nhập"><a id="addnhanvien"
+            <button style="font-size:2vw;font-size:2vh" id="uploadfile" class="btn btn-success" type="button" title="Nhập"><a id="addnhanvien"
                 href="{{ route('admin.serviceAddView') }}"><i class="fas fa-plus"></i>>
                 Tạo mới dịch vụ</a></button>
           </div>
           <div class="search mt-4 mb-4 input-group" style="width:50%">
             <button class="input-group-text btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></button>
-            <input class="form-control" type="text" id="searchNV">
+            <input style="font-size:2vw;font-size:2vh" class="form-control" type="text" id="searchNV">
           </div>
-          <table class="table table-hover table-bordered text-center table-responsive" cellpadding="0" cellspacing="0"
+          <table style="font-size:2vw;font-size:2vh" class="table table-hover table-bordered text-center table-responsive" cellpadding="0" cellspacing="0"
             border="0" id="sampleTable">
             <thead>
 
@@ -60,7 +60,7 @@
                 <td>{{ $row->name }}</td>
                 <td>{{ $row->created_at }}</td>
                 <td>
-                  <a> <button class="btn btn-danger" data-bs-toggle="modal"
+                  <a> <button style="font-size:2vw;font-size:2vh" class="btn btn-danger" data-bs-toggle="modal"
                       data-bs-target="#delete-service{{ $row->id }}"><i class="fa-solid fa-x"></i></button></a>
                   <!-- Modal xóa -->
                   <div class="modal fade" id="delete-service{{ $row->id }}" tabindex="-1"
@@ -86,7 +86,7 @@
                     </div>
                   </div>
                   {{-- Change --}}
-                  <a href="{{ route('admin.change',['id'=>$row->id]) }}"> <button class="btn btn-success"><i
+                  <a  href="{{ route('admin.change',['id'=>$row->id]) }}"> <button style="font-size:2vw;font-size:2vh" class="btn btn-success"><i
                         class="fas fa-edit"></i></button></a>
                 </td>
               </tr>

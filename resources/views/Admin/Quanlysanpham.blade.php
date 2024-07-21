@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="pagetitle">
-    <h1>Quản lý sản phẩm</h1>
+    <h1 style="font-size:2.5vw;font-size:2.5vh">Quản lý sản phẩm</h1>
     <!-- End Page Title -->
     <div class="row">
         <div class="col-md-12">
@@ -22,20 +22,20 @@
                     @endif
                     <div class="button-function d-flex justify-content-between mt-3 mb-4" style="width:70%">
 
-                        <button id="uploadfile" class="btn btn-success btn-sm nhap-tu-file" type="button"
+                        <button style="font-size:2vw;font-size:2vh" id="uploadfile" class="btn btn-success btn-sm nhap-tu-file" type="button"
                             title="Nhập"><a style="color:white" href="{{ route('admin.addForm') }}"><i
                                     class="fas fa-plus"></i>>
                                 Tạo mới sản phẩm</a></button>
 
                     </div>
                     <div class="search mt-4 mb-4 input-group" style="width:50%">
-                        <button class="input-group-text btn btn-success"><i
+                        <button style="font-size:2vw;font-size:2vh"  class="input-group-text btn btn-success"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                         <input class="form-control" type="text" id="searchProduct">
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table table-hover table-bordered " id="sampleTable">
+                        <table style="font-size:2vw;font-size:2vh" class="table table-hover table-bordered " id="sampleTable">
                             <thead>
                                 <tr class="table-success text-center">
                                     <th>Mã sản phẩm</th>
@@ -71,18 +71,18 @@
                                     <td>{{ $row->cost }}</td>
                                     <td>{{ $row->discount }}%</td>
                                     @if ($row->hot > 0)
-                                    <td><input type="checkbox" checked></td>
+                                    <td><i class="fa-solid fa-check" style="color: #06e302;"></i></td>
                                     @else
-                                    <td><input type="checkbox"></td>
+                                    <td></td>
                                     @endif
 
                                     <td class="table-td-center">
-                                        <a> <button class="btn btn-danger btn-sm trash" data-bs-toggle="modal"
+                                        <a> <button style="font-size:2vw;font-size:2vh" class="btn btn-danger btn-sm trash" data-bs-toggle="modal"
                                                 data-bs-target="#delete-product{{ $row->idPro }}" type="button"
                                                 title="Xóa">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button></a>
-                                        <button class="btn btn-success btn-sm edit" type="button" title="Sửa"
+                                        <button style="font-size:2vw;font-size:2vh" class="btn btn-success btn-sm edit" type="button" title="Sửa"
                                             id="show-emp">
                                             <a style="text-decoration:none;color:white"
                                                 href="{{ route('admin.changeProductView',['id'=>$row->idPro]) }}"><i
