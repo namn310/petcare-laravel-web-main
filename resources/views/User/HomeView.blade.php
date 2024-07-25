@@ -1,8 +1,88 @@
 @extends('User.LayoutTrangChu')
 @section('content')
+@if (session('success'))
+<script>
+    $.toast({
+                heading: 'Success',
+                text: '{{ session('success') }}',
+                showHideTransition: 'slide',
+                icon: 'success',
+                position: 'bottom-right'
+            })
+</script>
+@endif
+@if (session('error'))
+<script>
+    $.toast({
+                heading: 'Error',
+                text: '{{ session('error') }}',
+                showHideTransition: 'slide',
+                icon: 'error',
+                position: 'bottom-right'
+            })
+</script>
+@endif
+@if (session('notice'))
+<script>
+    $.toast({
+                heading: 'Success',
+                text: '{{ session('notice') }}',
+                showHideTransition: 'slide',
+                icon: 'success',
+                position: 'bottom-right'
+            })
+</script>
+@endif
 <div class="contentuser">
     <div class="container">
         <img style="width:100%" class="img-fluid" src="{{ asset('assets/img/banner_collection.webp') }}">
+    </div>
+    {{-- voucher --}}
+    <div class="text-center mt-2">
+        <h3 id="hotProductText" style="color: #ea9e1e;">Vouchers</h3>
+        <div class="container">
+            <div class="carouselVoucher">
+                @foreach ($voucher as $row)
+                {{-- voucherItem --}}
+                <div style="max-width:150xp;height:240px;background-color:red;color:white;border-radius:10px"
+                    class="d-flex align-items-center me-3 text-center">
+                    <div class="me-3 ms-2" style="font-size:30px">
+                        <i class="fa-solid fa-ticket fa-xl" style="color: white;"></i>
+                    </div>
+                    <div class="p-2">
+                        <h4 style="font-size:3vw;font-size:3vh">{{ $row->ma }}</h4>
+                        <p>
+                            Giảm {{ $row->discount }}% giá trị đơn hàng.
+                            @if ($row->dk_hoadon != '')
+                            <span style="font-size:2vw;font-size:2vh">Áp dụng cho hóa đơn tối thiểu
+                                {{ number_format($row->dk_hoadon) }}đ</span>
+                            @endif
+                            @if ($row->dk_soluong != '')
+                            <span style="font-size:2vw;font-size:2vh">Áp dụng với số lượng sản phẩm trong đơn
+                                hàng là {{ $row->dk_soluong }}</span>
+                            @endif
+                            @if ($row->dk_hoadon == '' && $row->dk_soluong == '')
+                            <span style="font-size:2vw;font-size:2vh">Áp dụng cho mọi đơn hàng</span>
+                        </p>
+                        @endif
+                        <br>
+                        <span> <i style="font-size:1.5vw;font-size:1.5vh">{{ $row->time_start }}->{{ $row->time_end
+                                }}</i>
+                        </span>
+                        <div class="text-end mb-2">
+                            @if ($row->id == $voucherDetail->getIdVoucherUser($row->id))
+                            <button class="btn btn-light">Đã lưu</button>
+                            @else
+                            <a href="{{ route('user.saveVoucher', ['id' => $row->id]) }}"> <button
+                                    class="btn btn-light saveVoucher">Lưu</button></a>
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
     </div>
     <!--Hot product-->
     <div class="d-flex flex-column justify-content-center align-items-center mb-3">
@@ -27,8 +107,7 @@
                         <div class="onsale">
                             @if ($row->discount > 0)
                             <span style="position: absolute;top:40px" class="badge rounded-2"><i
-                                    class="fa-solid fa-arrow-down"></i>{{ $row->discount
-                                }}%</span>
+                                    class="fa-solid fa-arrow-down"></i>{{ $row->discount }}%</span>
                             @endif
                             <a href="{{ route('user.productDetail', ['id' => $row->idPro]) }}"><img
                                     src="{{ asset('assets/img-add-pro/' . $row->getImgProduct($row->idPro)) }}"
@@ -129,27 +208,14 @@
             $(document).ready(function() {
                 $('.carouselHome').slick({
                     slidesToShow: 6,
-                    slideToScroll:6,
+                    slideToScroll: 6,
                     dots: true,
                     arrows: true,
                     cssEase: 'linear',
                     accessibility: true,
                     autoplay: true,
                     autoplaySpeed: 600,
-                    responsive: [
-                        // {
-                        // breakpoint: 2400,
-                        // settings: {
-                        // slidesToShow: 8,
-                        // dots: true,
-                        // arrows: true,
-                        // cssEase: 'linear',
-                        // accessibility: true,
-                        // autoplay: true,
-                        // autoplaySpeed: 600,
-                        // }
-                        // },
-                        {
+                    responsive: [{
                             breakpoint: 1400,
                             settings: {
                                 slidesToShow: 4,
@@ -164,6 +230,44 @@
 
                         {
                             breakpoint: 992,
+                            settings: {
+                                slidesToShow: 3,
+                                dots: true,
+                                arrows: true,
+                                cssEase: 'linear',
+                                accessibility: true,
+                                autoplay: true,
+                                autoplaySpeed: 600,
+                            }
+                        },
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                slidesToShow: 2,
+                                dots: true,
+                                arrows: true,
+                                cssEase: 'linear',
+                                accessibility: true,
+                                autoplay: true,
+                                autoplaySpeed: 600,
+                            }
+                        },
+
+                    ]
+                });
+
+                // voucher
+                $('.carouselVoucher').slick({
+                    slidesToShow: 4,
+                    slideToScroll: 4,
+                    dots: true,
+                    arrows: true,
+                    cssEase: 'linear',
+                    accessibility: true,
+                    autoplay: true,
+                    autoplaySpeed: 600,
+                    responsive: [{
+                            breakpoint: 1400,
                             settings: {
                                 slidesToShow: 3,
                                 dots: true,

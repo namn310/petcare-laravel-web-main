@@ -11,26 +11,7 @@ class TestController extends Controller
 {
     public function index()
     {
-        $product = product::select()->where('products.idCat', 1)->orderBy('cost', 'desc')->get();
-        // $product = product::select('cost')->orderBy('cost', 'asc')->get();
-        // dd($Pro);
-        // $product = DB::table('products')->select('namePro')->where('idCat', 1)->get();
-        $productlist = [];
-        foreach ($product as $a) {
-            $productItem = [
-                'namePro' => $a->namePro,
-                'cost' => $a->cost,
-                'discount' => $a->discount,
-                'costDiscount' => number_format($a->cost - ($a->cost * $a->discount) / 100),
-                'image' => $a->getImgProduct($a->idPro)
-            ];
-            $productlist[] = $productItem;
-        }
-
-        dd(response()->json($productlist));
-        return response()->json($productlist);
-
-        return response()->json(['error' => 'Internal Server Error'], 500);
+        return view('User.test');
     }
     public function store(Request $request)
     {

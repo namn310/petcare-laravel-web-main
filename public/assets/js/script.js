@@ -313,15 +313,12 @@ $(document).ready(function () {
 			});
 		});
 	});
-});
-
-// slick carousel homeview
-  $(document).ready(function ()
-        {
-            $('.carouselHomeView').slick({
+	 $('.carouselHomeView').slick({
 				slidesToShow: 3,
 				
                 dots: true,
                 centerMode: true,
             });
-        });
+});
+
+// slick carousel homeview

@@ -14,7 +14,8 @@
                         <input class="form-control" type="text" id="searchCustomer">
                     </div>
 
-                    <table style="font-size:2vw;font-size:2vh" class="table table-hover table-responsive table-bordered text-center" cellpadding="0"
+                    <table style="font-size:2vw;font-size:2vh"
+                        class="table table-hover table-responsive table-bordered text-center" cellpadding="0"
                         cellspacing="0" border="1" id="sampleTable">
                         <thead>
                             <tr class="table-primary">
@@ -25,14 +26,16 @@
                             </tr>
                         </thead>
                         <tbody id="table-customer">
+                            @foreach ($customer as $row )
                             <tr>
-                                @foreach ($customer as $row )
+
                                 <td>{{ $row->id }}</td>
                                 <td>{{ $row->name }}</td>
                                 <td>{{ $row->phone }}</td>
                                 <td>{{ $row->email }}</td>
-                                @endforeach
+
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

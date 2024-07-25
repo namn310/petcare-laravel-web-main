@@ -59,7 +59,6 @@
                 </li><!-- End Search Icon-->
                 @if (!Auth::check())
                 <li><a href="{{ route('admin.login') }}">Đăng nhập</a></li>
-                {{ Auth::user()->name }}
 
                 @else
                 <li class="nav-item dropdown pe-3">
@@ -93,7 +92,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="register">
+                            <a class="dropdown-item d-flex align-items-center" href="admin/register">
                                 <i class="fa-solid fa-plus"></i>
                                 <span style="font-size:1.5vw;font-size:1.5vh">Tạo tài khoản</span>
                             </a>
@@ -108,154 +107,6 @@
                     </ul><!-- End Profile Dropdown Items -->
                 </li><!-- End Profile Nav -->
                 @endif
-
-                {{--
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-bell"></i>
-                        <span class="badge bg-primary badge-number">4</span>
-                    </a><!-- End Notification Icon -->
-
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-                        <li class="dropdown-header">
-                            Bạn có 4 thông báo mới
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Xem tất cả</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-exclamation-circle text-warning"></i>
-                            <div>
-                                <h4>Quản lí</h4>
-                                <p>Tấn chôm tiền đi bắn bi-a</p>
-                                <p>30 phút trước</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-x-circle text-danger"></i>
-                            <div>
-                                <h4>Cảnh báo</h4>
-                                <p>Có 4 nhân viên đến muộn hôm nay</p>
-                                <p>1 giờ trước</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-check-circle text-success"></i>
-                            <div>
-                                <h4>Thông báo</h4>
-                                <p>Quyết định sa thải đồng chí Tấn</p>
-                                <p>2 giờ trước</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="notification-item">
-                            <i class="bi bi-info-circle text-primary"></i>
-                            <div>
-                                <h4>Thông báo</h4>
-                                <p>Tấn dẫn các bác sĩ đi trộm chó</p>
-                                <p>4 giờ trước</p>
-                            </div>
-                        </li>
-
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li class="dropdown-footer">
-                            <a href="#">Xem tất cả thông báo</a>
-                        </li>
-
-                    </ul><!-- End Notification Dropdown Items -->
-
-                </li><!-- End Notification Nav -->
-
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-chat-left-text"></i>
-                        <span class="badge bg-success badge-number">3</span>
-                    </a><!-- End Messages Icon -->
-                    <style>
-                        .message-item a {
-                            text-decoration: none;
-                        }
-                    </style>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                        <li class="dropdown-header">
-                            Bạn có 3 thông báo
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">Xem tất cả</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="{{ asset('assets/img/avt.jpg') }}" alt="" class="rounded-circle">
-                                <div>
-                                    <h4>Tấn</h4>
-                                    <p>Nay xin nghỉ nhé</p>
-                                    <p>4 giờ trước</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="{{ asset('assets/img/avt2.png') }}" alt="" class="rounded-circle">
-                                <div>
-                                    <h4>Nam</h4>
-                                    <p>Tấn xin cho tôi nghỉ rồi nhé</p>
-                                    <p>6 giờ trước</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="">
-                                <img src="{{ asset('assets/img/avt.jpg') }}" alt="" class="rounded-circle">
-                                <div>
-                                    <h4>Khang</h4>
-                                    <p>Đơn sa thải đồng chí Tấn đến đâu rồi</p>
-                                    <p>8 giờ trước</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="dropdown-footer">
-                            <a href="#">Hiển thị tất cả tin nhắn</a>
-                        </li>
-
-                    </ul><!-- End Messages Dropdown Items -->
-
-                </li><!-- End Messages Nav -->
-                --}}
-
 
 
             </ul>
@@ -303,6 +154,16 @@
             <li class="nav-item">
                 <a style="font-size:1.5vw;font-size:1.5vh" class="nav-link " href="{{ route('admin.order') }}">
                     <i class="fa-solid fa-cart-shopping"></i><span>Quản lý đơn hàng</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a style="font-size:1.5vw;font-size:1.5vh" class="nav-link " href="{{ route('admin.discount') }}">
+                    <i class="fa-solid fa-tags"></i><span>Quản lý chương trình khuyến mại</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a style="font-size:1.5vw;font-size:1.5vh" class="nav-link " href="{{ route('admin.voucher') }}">
+                    <i class="fa-solid fa-ticket"></i><span>Quản lý Voucher</span>
                 </a>
             </li>
             <li class="nav-item">

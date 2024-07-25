@@ -416,6 +416,11 @@ font-family:Bookman;
 .img-slide-small .slick-next:before {
   color: red !important;
 }
+
+.carouselVoucher .slick-prev:before,
+.carouselVoucher .slick-next:before {
+  color: red !important;
+}
 /* button buy */
 /* cartSmallView */
 .buttonThanhToan {

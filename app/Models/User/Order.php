@@ -7,14 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\product;
-
+use App\Models\Voucher;
+use App\Models\User\OrderDetail;
+use Throwable;
 
 class Order extends Model
 {
     protected $table = 'orders';
     protected $primaryKey = 'id';
     public $timestamp = true;
-    protected $fillable = ['idCus', 'status', 'address', 'note', 'thanhtoan'];
+    protected $fillable = ['idCus', 'status', 'address', 'note', 'thanhtoan', 'idVoucher', 'created_at'];
     use HasFactory;
     public function customer()
     {
@@ -84,5 +86,23 @@ class Order extends Model
             }
         }
         return $total;
+    }
+    public function getVoucher($id)
+    {
+        try {
+            $order = Order::find($id);
+            $idVoucher = $order->idVoucher;
+            // find voucher and get detail
+            $voucher = Voucher::find($idVoucher);
+            return $voucher->discount;
+        } catch (Throwable) {
+            return 0;
+        }
+    }
+    public function getTotalOrder($id)
+    {
+        $totalCost = $this->getTotalCost($id);
+        $voucher = $this->getVoucher($id);
+        return $totalCost - ($totalCost * ($voucher / 100));
     }
 }

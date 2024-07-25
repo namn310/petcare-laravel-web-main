@@ -40,17 +40,22 @@
 <div class="orderUser ms-3">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="home-tab" style="font-size:2vw;font-size:2vh" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
-                type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Giỏ hàng của bạn</button>
+            <button class="nav-link active" id="home-tab" style="font-size:2vw;font-size:2vh" data-bs-toggle="tab"
+                data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane"
+                aria-selected="true">Giỏ hàng của bạn</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="profile-tab" style="font-size:2vw;font-size:2vh" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
-                type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Lịch hẹn</button>
+            <button class="nav-link" id="profile-tab" style="font-size:2vw;font-size:2vh" data-bs-toggle="tab"
+                data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane"
+                aria-selected="false">Lịch hẹn</button>
         </li>
-        <div class="tab-content container-fluid d-flex align-items-center justify-content-center flex-column flex-wrap" id="myTabContent">
+        <div class="tab-content container-fluid d-flex align-items-center justify-content-center flex-column flex-wrap"
+            id="myTabContent">
             {{-- cartSmallView --}}
             <div class="cartSmallView mt-2 tab-pane fade show active " id="home-tab-pane" role="tabpanel"
                 aria-labelledby="home-tab" tabindex="0">
+                @if ($OrderCount==0) <h3 class="mt-3">Bạn chưa có đơn hàng nào. Hãy quay lại trang chủ để mua sắm</h3>
+                @else
                 <section class="h-100" style="background-color: #d2c9ff;">
                     <div class="container py-5 h-100">
                         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -94,7 +99,8 @@
                                                                     {{
                                                                     number_format((
                                                                     ($row->price - ($row->price *
-                                                                    ($row->getProductDiscount($row->idPro) / 100)))))
+                                                                    ($row->getProductDiscount($row->idPro) /
+                                                                    100)))))
                                                                     }}đ
                                                                 </h5>
                                                                 @else
@@ -107,6 +113,11 @@
                                                             </div>
 
                                                             @endforeach
+                                                        </div>
+                                                        <div class="text-end">
+                                                            <h6 class="text-danger"><b> Tổng tiền : {{
+                                                                    number_format($order->getTotalOrder($order->id))
+                                                                    }}đ</b></h6>
                                                         </div>
                                                         <div>
                                                             <h6 class="text-end"> <i
@@ -142,6 +153,10 @@
                         </div>
                     </div>
                 </section>
+                @endif
+
+
+
             </div>
             <div class="booking mt-4 tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
                 tabindex="0" style="width:60%;font-size:2vh;font-size:2vw">

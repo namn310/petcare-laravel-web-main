@@ -1,7 +1,7 @@
 @extends('Admin.Layout')
 @section('content')
 <div class="pagetitle">
-    <h1 style="font-size:2vw;font-size:2vh">Danh Sách lịch hẹn</h1>
+    <h1 style="font-size:2.5vw;font-size:2.5vh">Danh Sách lịch hẹn</h1>
 
 </div><!-- End Page Title -->
 @if (session('notice'))

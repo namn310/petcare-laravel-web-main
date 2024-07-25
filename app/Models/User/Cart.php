@@ -85,5 +85,45 @@ class Cart extends Model
         $this->count = $count;
        */
     }
-   
+    public function checkOut($request, $id)
+    {
+        $order = new Order();
+        // $order = Order::create(['idCus' => $id, 'status' => 0, 'address' => $request->input('address'), 'note' => $request->input('address'), 'thanhtoan' => $request->input('payment'), 'idVoucher' => $request->input('idVoucher')]);
+        $order->idCus = $id;
+        $order->status = 0;
+        $order->address = $request->input('address');
+        $order->note = $request->input('address');
+        $order->thanhtoan = $request->input('payment');
+        $order->created_at = now('Asia/Ho_Chi_Minh');
+        //lấy idVoucher để truyền vào bảng order
+        if ($request->input('idVoucher')) {
+            $voucherUser = VoucherUser::find($request->input('idVoucher'));
+            $voucherId = $voucherUser->id_voucher;
+            $order->idVoucher = $voucherId;
+        } else {
+            $order->idVoucher = null;
+        }
+        //lưu
+        $order->save();
+        $latestOrder = Order::latest()->first()->toArray();
+        $idLatestOrder = $latestOrder['id'];
+        //  $lastPro = product::latest()->first()->toArray();
+        //dd($idLatestOrder);
+        foreach (session('cart') as $product) {
+            $idPro = $product['idPro'];
+            $orderDetail = OrderDetail::create([
+                'number' => $product['count'],
+                'idPro' => $idPro,
+                'price' => $product['cost'],
+                'idOrder' => $idLatestOrder
+            ]);
+        }
+        // Dùng voucher xong thì giảm số lượng voucher;
+        if ($request->input('idVoucher')) {
+            $voucherUser = VoucherUser::find($request->input('idVoucher'));
+            $soluong = $voucherUser->soluong;
+            $voucherUser->soluong = $soluong - 1;
+            $voucherUser->update();
+        }
+    }
 }

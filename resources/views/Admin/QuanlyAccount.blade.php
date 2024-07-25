@@ -1,7 +1,7 @@
 @extends('Admin.Layout')
 @section('content')
 <div class="pagetitle">
-    <h1 style="font-size:2vw;font-size:2vh">Quản lý tài khoản</h1>
+    <h1 style="font-size:2.5vw;font-size:2.5vh">Quản lý tài khoản</h1>
     <!-- End Page Title -->
     <div class="row">
         <div class="col-md-12">

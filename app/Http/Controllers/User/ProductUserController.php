@@ -84,6 +84,6 @@ class ProductUserController extends Controller
         }
         return response()->json($product);
 
-        return response()->json(['error' => 'Internal Server Error'], 500);
+        // return response()->json(['error' => 'Internal Server Error'], 500);
     }
 }

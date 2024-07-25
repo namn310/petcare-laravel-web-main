@@ -29,7 +29,8 @@ class AccountUserController extends Controller
                 'name' => 'required',
                 'email' => [
                     'bail',
-                    'regex:/^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/'
+                    'regex:/^[a-zA-Z0-9]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/',
+                    'unique:customer'
                 ],
                 //nếu trong rules có regex thì phải dùng mảng
                 'phone' => [

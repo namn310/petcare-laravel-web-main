@@ -64,20 +64,12 @@
             <div class="col-md-6 right-box">
                 <div class="row align-items-center text-center">
                     <div class="header-text mb-4">
-                        <h3 style="font-family: 'Courier New', Courier, monospace;font-weight: 600;">Đăng Ký</h3>
+                        <h3 style="font-family: 'Courier New', Courier, monospace;font-weight: 600;">Đổi mật khẩu</h3>
                     </div>
 
-                    <form id="loginForm" method="post" action="{{ route('user.registAccount') }}">
+                    <form id="loginForm" method="post" action="{{ route('user.resetPass') }}">
                         @csrf
                         @method('POST')
-                        <div class="form-group mb-3">
-                            <input type="username" name="name" class="form-control form-control-lg bg-light fs-6"
-                                id="name" placeholder="Tên người dùng">
-                            @error('name')
-                            <p class="UsernameError text-danger text-start ps-1">{{ $message }}</p>
-                            @enderror
-
-                        </div>
                         <div class="form-group mb-3">
                             <input name="email" class="form-control form-control-lg bg-light fs-6" id="email"
                                 placeholder="Địa chỉ Email">
@@ -86,17 +78,10 @@
                             @enderror
 
                         </div>
-                        <div class="form-group mb-3">
-                            <input type="text" name="phone" class="form-control form-control-lg bg-light fs-6"
-                                id="phone" placeholder="Số điện thoại">
-                            @error('phone')
-                            <p class=" text-danger text-start ps-1">{{ $message }}</p>
-                            @enderror
-
-                        </div>
+                        <input type="text" name="token" value="{{ $token }}" hidden>
                         <div class="form-group mb-3">
                             <input type="password" name="password" class="form-control form-control-lg bg-light fs-6"
-                                id="password" placeholder="Mật Khẩu">
+                                id="password" placeholder="Mật Khẩu mới">
                             @error('password')
                             <p class="passwordError text-danger text-start ps-1">{{ $message }}</p>
                             @enderror
@@ -114,7 +99,7 @@
 
                         <div class="input-group mb-3">
                             <button class="btn btn-lg btn-warning w-100 fs-6" type="submit" name="dangky"
-                                id="submit">Đăng Ký</button>
+                                id="submit">Đồng ý</button>
                         </div>
                     </form>
 

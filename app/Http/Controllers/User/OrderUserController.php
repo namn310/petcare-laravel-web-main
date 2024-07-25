@@ -16,9 +16,14 @@ class OrderUserController extends Controller
     {
         $idCus = Auth('customer')->user()->id;
         $Order = Order::select()->where('idCus', $idCus)->get()->sortByDesc('id');
-        $OrderCount = Order::select()->where('idCus', $idCus)->get()->count();
+        $Count = Order::select()->where('idCus', $idCus)->get()->count();
+        if ($Count) {
+            $OrderCount = $Count;
+        } else {
+            $OrderCount = 0;
+        }
         $bookingCount = Booking::select()->where('idCus', $idCus)->get()->count();
         $bookingForm = Booking::select()->where('idCus', $idCus)->get()->sortByDesc('id');
-        return view('User.Order', ['Order' => $Order, 'bookingCount' => $bookingCount, 'bookingForm' => $bookingForm,'OrderCount'=>$OrderCount]);
+        return view('User.Order', ['Order' => $Order, 'bookingCount' => $bookingCount, 'bookingForm' => $bookingForm, 'OrderCount' => $OrderCount]);
     }
 }

@@ -21,10 +21,14 @@ class category extends Model
 
     public function createCat($request)
     {
-        $category=category::create([
-            'name'=>$request->input('nameDM')
+        $category = category::create([
+            'name' => $request->input('nameDM')
         ]);
         $category->save();
-
+    }
+    public function getCategoryName($id)
+    {
+        $category = category::find($id);
+        return $category->name;
     }
 }

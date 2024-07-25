@@ -50,6 +50,7 @@ class Customer extends Authenticatable
     {
         return $this->hasMany(Booking::class);
     }
+   
     public function checkLoginUser($request)
     {
         if (Auth::guard('customer')->attempt(['email' => $request->email, 'password' => $request->password])) {

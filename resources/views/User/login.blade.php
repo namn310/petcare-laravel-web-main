@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pet Care</title>
-    <link rel="shortcut icon" type="image/png" href="../Project-petcare-php/images/logo/PetCARE.png">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/img/PetCARE.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link rel="stylesheet" href="{{ asset('assets/css/user-responsive.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/user1.css') }}">
@@ -107,7 +107,7 @@
                                         khoản!</small></label>
                             </div>
                             <div class="forgot">
-                                <small><a href="forgotPassword.html">Quên Mật Khẩu?</a></small>
+                                <small><a href="{{ route('user.forgetPass') }}">Quên Mật Khẩu?</a></small>
                             </div>
                         </div>
                         <div class="input-group mb-3">

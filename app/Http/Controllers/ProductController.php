@@ -17,8 +17,8 @@ class ProductController extends Controller
     public function index()
     {
         // $productPag = product::paginate(8);
-        $product = product::paginate(8);
-        $product->sortBy('idPro');
+        $product = product::orderBy('idPro', 'desc')->paginate(8);
+        // $product->sortBy('idPro')
         $category = category::all();
         return view('Admin.Quanlysanpham', ['product' => $product, 'category' => $category]);
     }

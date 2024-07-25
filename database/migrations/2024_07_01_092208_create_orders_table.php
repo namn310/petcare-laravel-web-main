@@ -11,6 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::create(
+            'vouchers',
+            function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('ma');
+                $table->integer('soluong');
+                $table->integer('dk_hoadon')->nullable();
+                $table->integer('dk_soluong')->nullable();
+                $table->integer('discount');
+                $table->integer('status');
+                $table->string('description')->nullable();
+                $table->string('time_start');
+                $table->string('time_end');
+                $table->timestamps();
+            }
+        );
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('status')->default(0);
@@ -20,6 +36,8 @@ return new class extends Migration
             $table->timestamps();
             $table->unsignedInteger('idCus');
             $table->foreign('idCus')->references('id')->on('customer')->onDelete('cascade');
+            $table->unsignedInteger('idVoucher')->nullable();
+            $table->foreign('idVoucher')->references('id')->on('vouchers')->onDelete('cascade');
         });
         Schema::create('order_detail', function (Blueprint $table) {
             $table->increments('id');
@@ -37,7 +55,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-         Schema::dropIfExists('orders');
-         Schema::dropIfExists('order_detail');
+        Schema::dropIfExists('vouchers');
+        Schema::dropIfExists('orders');
+        Schema::dropIfExists('order_detail');
     }
 };

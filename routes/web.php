@@ -13,6 +13,8 @@ use App\Http\Controllers\User\AccountUserController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\VoucherController;
 //class user
 use App\Http\Controllers\User\HomeUserController;
 use App\Http\Controllers\User\ProductUserController;
@@ -21,7 +23,11 @@ use App\Http\Controllers\User\CommentController;
 use App\Http\Controllers\User\checkOutController;
 use App\Http\Controllers\User\BookingUserController;
 use App\Http\Controllers\User\OrderUserController;
+use App\Http\Controllers\User\VoucherUserController;
 use Illuminate\Support\Facades\Route;
+
+//Forgot pass
+use App\Http\Controllers\Email\ForgetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,11 +40,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('test1', function () {
-//     return view('Admin.Home');
-// });
-Route::get('test', [TestController::class, 'index'])->name('User.test');
-Route::post('test', [TestController::class, 'store'])->name('test.store');
+Route::get('test', function () {
+    return view('User.test');
+});
+// Route::get('test', [TestController::class, 'index'])->name('User.test');
+// Route::post('test', [TestController::class, 'store'])->name('test.store');
 //user view
 Route::group(['namespace' => 'User', 'prefix' => ''], function () {
     //phải đăng nhập mới được truy cập
@@ -54,13 +60,24 @@ Route::group(['namespace' => 'User', 'prefix' => ''], function () {
         //booking
         Route::post('book', [BookingController::class, 'store'])->name('user.bookCreate');
         //cart checkout
-        Route::get('cart/checkout', [CartController::class, 'checkout'])->name('user.checkout');
-        Route::post('cart/checkout', [checkOutController::class, 'confirmCheckOut'])->name('user.confirmCheckOut');
+        Route::post('cart/checkout', [CartController::class, 'confirmCheckOut'])->name('user.confirmCheckOut');
         //follow orrder
         Route::get('order', [OrderUserController::class, 'index'])->name('user.orderView');
         Route::put('order/updateBook/{id}', [BookingController::class, 'update'])->name('user.updateBooking');
         Route::get('order/destroyBook/{id}', [BookingController::class, 'destroy'])->name('user.destroyBook');
+        Route::get('saveVoucher/{id}', [VoucherUserController::class, 'store'])->name('user.saveVoucher');
+        // cart
+        Route::get('cart/addPro/{id}', [CartController::class, 'add'])->name('user.add');
+        Route::get('cart/destroy', [CartController::class, 'destroyCart'])->name('user.destroyCart');
+        Route::post('cart/update', [CartController::class, 'update'])->name('user.cartupdate');
+        Route::get('cart/delete/{id}', [CartController::class, 'delete'])->name('user.delete');
+        Route::get('cart/voucher', [CartController::class, 'useVoucher'])->name('user.useVoucher');
     });
+    //forget pass
+    Route::get('forgetPass', [ForgetPasswordController::class, 'index'])->name('user.forgetPass');
+    Route::post('forgetPass', [ForgetPasswordController::class, 'forgetPass'])->name('user.sendEmail');
+    Route::get('notification/{token}', [ForgetPasswordController::class, 'Notification'])->name('user.NotiForgetPass');
+    Route::post('resetPass',[ForgetPasswordController::class,'resetPassword'])->name('user.resetPass');
 
     Route::get('loginUser', [AccountUserController::class, 'index'])->name('user.login');
     // Route::post('login', [AccountUserController::class, 'login'])->name('user.checkAccount');
@@ -91,10 +108,6 @@ Route::group(['namespace' => 'User', 'prefix' => ''], function () {
     })->name('user.contact');
     //Cart
     Route::get('cart', [CartController::class, 'index'])->name('user.cart');
-    Route::get('cart/addPro/{id}', [CartController::class, 'add'])->name('user.add');
-    Route::get('cart/destroy', [CartController::class, 'destroyCart'])->name('user.destroyCart');
-    Route::post('cart/update', [CartController::class, 'update'])->name('user.cartupdate');
-    Route::get('cart/delete/{id}', [CartController::class, 'delete'])->name('user.delete');
 });
 
 //admin view
@@ -168,6 +181,20 @@ Route::prefix('admin')->middleware('checkLogin::class')->group(function () {
     Route::get('banner', [BannerController::class, 'index'])->name('admin.banner');
     Route::get('banner/create', [BannerController::class, 'create'])->name('admin.bannerCreate');
     Route::post('banner/create', [BannerController::class, 'store'])->name('admin.bannerStore');
+    //discount
+    Route::get('discount', [DiscountController::class, 'index'])->name('admin.discount');
+    Route::get('discount/create', [DiscountController::class, 'create'])->name('admin.createDiscount');
+    Route::post('discount/create', [DiscountController::class, 'store'])->name('admin.storeDiscount');
+    Route::get('discount/delete/{id}', [DiscountController::class, 'destroy'])->name('admin.destroyDiscount');
+    Route::get('discount/change/{id}', [DiscountController::class, 'edit'])->name('admin.changeDiscount');
+    Route::patch('discount/change/{id}', [DiscountController::class, 'update'])->name('admin.updateDiscount');
+    //voucher
+    Route::get('voucher', [VoucherController::class, 'index'])->name('admin.voucher');
+    Route::get('voucher/create', [VoucherController::class, 'create'])->name('admin.createVoucher');
+    Route::post('voucher/store', [VoucherController::class, 'store'])->name('admin.storeVoucher');
+    Route::get('voucher/change/{id}', [VoucherController::class, 'edit'])->name('admin.changeVoucher');
+    Route::patch('voucher/change/{id}', [VoucherController::class, 'update'])->name('admin.updateVoucher');
+    Route::get('voucher/delete/{id}', [VoucherController::class, 'destroy'])->name('admin.destroyVoucher');
 });
 /*Route::get('/', function () {
     return view('welcome');
