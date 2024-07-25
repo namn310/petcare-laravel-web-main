@@ -414,7 +414,7 @@
                 data: {
                     labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                     datasets: [{
-                        label: "Mobile apps",
+                        label: "sales",
                         tension: 0,
                         borderWidth: 0,
                         pointRadius: 5,
@@ -497,7 +497,7 @@
                 data: {
                     labels: ["M", "T", "W", "T", "F", "S", "S"],
                     datasets: [{
-                        label: "Mobile apps",
+                        label: "person",
                         tension: 0,
                         borderWidth: 0,
                         pointRadius: 5,
