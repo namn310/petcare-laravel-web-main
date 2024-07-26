@@ -60,7 +60,11 @@ class ProductUserController extends Controller
         $productDetail = $product->getDetail($id);
         $productMainImg = $product->getImgProduct($id);
         $productListImg = $product->getAllImg($id);
-        return view('User.product-detail', ['productDetail' => $productDetail, 'category' => $category, 'productMainImg' => $productMainImg, 'productListImg' => $productListImg, 'comment' => $comment]);
+        //lay danhmuc san pham
+        //lấy ra các sản phẩm tương tự
+        $idCat = $product->getIdCat($id);
+        $productRelated = product::where('idCat', $idCat)->where('idPro', '!=', $id)->limit(10)->get();
+        return view('User.product-detail', ['productDetail' => $productDetail, 'category' => $category, 'productMainImg' => $productMainImg, 'productListImg' => $productListImg, 'comment' => $comment, 'productRelated' => $productRelated]);
     }
 
     public function Product(Request $request)

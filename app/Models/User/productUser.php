@@ -30,4 +30,11 @@ class productUser extends Model
         $img = ImageProduct::select('image')->where('idPro', $id)->get();
         return $img;
     }
+    public function getIdCat($id)
+    {
+        $product = DB::table('products')->select("idCat")->where('idPro', $id)->get();
+        foreach ($product as $row) {
+            return $row->idCat;
+        }
+    }
 }

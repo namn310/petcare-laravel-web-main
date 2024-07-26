@@ -130,5 +130,6 @@ class product extends Model
             return $row->name;
         }
     }
+   
     // src="{{ asset('assets/img-add-pro/') }}${product.idPro}"
 }

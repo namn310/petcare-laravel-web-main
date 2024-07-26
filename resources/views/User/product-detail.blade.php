@@ -53,6 +53,22 @@
                     $('.main-img-product').attr('src', a);
                 })
             });
+            //ajax comment
+            $('#submitComment').on('click',function(){
+              var idPro=$('#idPro').text();
+              var comment =$('#commentTitle').val();
+              
+            })
+            // $.ajax({
+            //   url: 'product/detail/'.idPro,
+            //   method: 'POST',
+            //   data: {
+            //     comment: comment
+            //   },
+            //   success: function(response){
+                
+            //   }
+            // })
         })
 </script>
 <!-- Danh mục sản phẩm-->
@@ -99,6 +115,7 @@
 
       @foreach ($productDetail as $row)
       <div class="d-flex">
+        <p id="idPro" hidden>{{ $row->idPro }}</p>
         <div class="img-slide mt-3" style="max-height:550px;max-width:200px;overflow:hidden">
           @foreach ($productListImg as $result)
           <div style="max-width:140px;border-top:1px solid black;border-bottom:1px solid black"><img
@@ -162,7 +179,7 @@
                 href="{{ route('user.add', ['id' => $row->idPro]) }}">
                 Mua
               </a></button>
-              
+
             @else
             <button type="button" style="width:150px ;margin-left:10px;margin-bottom:20px;font-size:2vw;font-size:2vh"
               id="cartSucess" class="btn btn-danger mt-3">
@@ -197,13 +214,15 @@
      -->
           @if (Auth::guard('customer')->check())
           <!-- box comment -->
-          <form method="post" action="{{ route('user.comment', ['id' => $row->idPro]) }}">
+          <form method="post" action="{{ route('user.comment',['id'=>$row->idPro]) }}">
             @csrf
             @method('post')
             <input placeholder="Nhập bình luận của bạn"
-              style="width:100%;border-radius:10px;height:70px;font-size:2vw;font-size:2vh" name="comment" required>
+              style="width:100%;border-radius:10px;height:70px;font-size:2vw;font-size:2vh" name="commentTitle"
+              id="commentTitle" required>
             <div>
-              <button class="btn btn-primary mt-3 float-end" style="font-size:2vw;font-size:2vh" type="submit">Bình
+              <button class="btn btn-primary mt-3 float-end" type="submit" style="font-size:2vw;font-size:2vh"
+                id="submitComment">Bình
                 luận</button>
             </div>
           </form>
@@ -218,9 +237,9 @@
               <div class="d-flex mt-3 ms-5">
                 {{-- avt user --}}
                 <div class="me-4">
-                  <img style="width:50px;height:50px;margin-left:40px;margin-top:10px;border-radius:20px"
+                  {{-- <img style="width:50px;height:50px;margin-left:40px;margin-top:10px;border-radius:20px"
                     class="img-fluid rounded text-center"
-                    src="{{ asset('assets/img-avt-customer/' . $cmt->getAvtCus($cmt->idCus)) }}">
+                    src="{{ asset('assets/img-avt-customer/' . $cmt->getAvtCus($cmt->idCus)) }}"> --}}
                 </div>
 
                 <div class=""
@@ -239,6 +258,72 @@
             </div>
             <!-- end danh sách bình luận -->
           </div>
+        </div>
+      </div>
+      <hr>
+      {{-- sản phẩm tương tự --}}
+      <div class="align-items-center">
+        <div class="text-center">
+          <h3>Các sản phẩm tương tự</h3>
+        </div>
+        {{-- danh sách sản phẩm --}}
+        <div class="product-list d-flex flex-wrap ms-5">
+          <!-- Lấy dữ liệu từ bảng product để xuất ra sản phẩm -->
+          @foreach ($productRelated as $product)
+          {{-- Thông tin sản phẩm --}}
+          <div id="product-infor" class="card position-relative" style="max-width:15rem;height:27rem"
+            style="border:0px">
+            {{-- giảm giá sản phẩm --}}
+            @if ($product->discount > 0)
+            <div class="onsale position-absolute top-0 start-0">
+              <span class="badge rounded-0 bg-danger"><i class="fa-solid fa-arrow-down"></i>
+                {{ $product->discount }}%
+              </span>
+            </div>
+            @endif
+            <div>
+              {{-- hình ảnh sản phẩm --}}
+              <a id="img_pro" href="{{ route('user.productDetail', ['id' => $product->idPro]) }}">
+                <img class="card-img-top img-fluid p-2" style="max-height:20rem"
+                  src="{{ asset('assets/img-add-pro/' . $product->getImgProduct($product->idPro)) }}"
+                  alt="Card image cap"></a>
+            </div>
+            <div class="card-body" id="card-body">
+              <h6 id="name-product" class="card-title">
+                {{ $product->namePro }}
+
+              </h6>
+              <span class="rating secondary-font">
+                <i class="fa-solid fa-star text-warning"></i>
+                <i class="fa-solid fa-star text-warning"></i>
+                <i class="fa-solid fa-star text-warning"></i>
+                <i class="fa-solid fa-star text-warning"></i>
+                <i class="fa-solid fa-star text-warning"></i>
+                5.0</span>
+              @if ($product->discount <= 0) <p class="card-text text-danger">
+                {{ number_format($product->cost) }}đ
+                </p>
+
+                <p hidden id="productCostHidden">{{ $product->cost }}</p>
+                @else
+                <p class="card-text text-danger text-decoration-line-through">
+                  {{ number_format($product->cost) }}đ
+                </p>
+                <p class="card-text text-danger" style="margin-top:-15px">
+
+                  {{ number_format($product->cost - ($product->cost * $product->discount) / 100) }}đ
+                </p>
+                <p hidden id="productCostHidden">
+                  {{ $product->cost - ($product->cost * $product->discount) / 100 }}
+                </p>
+                @endif
+                <a href="{{ route('user.add', ['id' => $product->idPro]) }}"
+                  style="text-decoration:none;color:white"><button type="submit" style="position:absolute;top:0;right:0"
+                    class="btn btn-white shadow-sm rounded-pill"><i style="color:black"
+                      class="fa-solid fa-cart-shopping text-danger"></i></button></a>
+            </div>
+          </div>
+          @endforeach
         </div>
       </div>
       <script>
