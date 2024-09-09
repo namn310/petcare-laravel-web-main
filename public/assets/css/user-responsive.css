@@ -75,6 +75,9 @@
   .orderUser{
     margin-top:180px;
   }
+  .inforUserView{
+    margin-top:180px;
+  }
 }
 @media screen and (min-width:1201px) {
   #btnSearchNav{
@@ -102,6 +105,9 @@
   }
   .orderUser{
     margin-top:220px;
+  }
+  .inforUserView{
+    margin-top:200px;
   }
 }
 @media screen and (max-width:1000px){

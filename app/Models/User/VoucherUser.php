@@ -41,4 +41,10 @@ class VoucherUser extends Model
             return $row->id_voucher;
         }
     }
+    public function updateVoucherUser($id)
+    {
+        $voucherUser = VoucherUser::find($id);
+        $voucherUser->status = 0;
+        $voucherUser->update();
+    }
 }

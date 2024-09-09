@@ -16,7 +16,7 @@ class checkLoginUser
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('customer')->check()) {
+        if (Auth::guard('customer')->check() || session('userDetail')) {
             return $next($request);
         } else {
             return redirect(route('user.login'));

@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('oauth_personal_access_clients', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title', 1024);
+            $table->unsignedBigInteger('client_id');
             $table->timestamps();
-            $table->unsignedBigInteger('idCus');
-            $table->foreign('idCus')->references('id')->on('customer')->onDelete('cascade');
-            $table->unsignedInteger('idPro');
-            $table->foreign('idPro')->references('idPro')->on('products')->ondelete('cascade');
         });
     }
 
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-         Schema::dropIfExists('comments');
+        Schema::dropIfExists('oauth_personal_access_clients');
     }
 };

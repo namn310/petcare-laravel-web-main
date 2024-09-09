@@ -185,43 +185,25 @@
             </div>
             <div class="form-group ">
                 <label style="font-weight: bolder;" class="control-label mt-3">Mô tả sản phẩm</label>
-
                 <textarea style="font-size:2vw;font-size:2vh" id="mota" name="mota" class="form-control">{{ $product->description }} </textarea>
                 <script type="text/javascript">
                     CKEDITOR.replace("mota");
                 </script>
             </div>
-
             <div class="form-group col-md-12">
                 <label style="font-weight: bolder;" class="control-label mt-3">Ảnh sản phẩm</label>
                 <input style="font-size:2vw;font-size:2vh" class="form-control" multiple id="imagepro" name="imagepro[]" style="width:30%" type="file">
-
                 @foreach ($product->getAllImg($product->idPro) as $img )
                 <img style="width:200px;height:200px;margin-top:20px"
                     src="{{ asset('assets/img-add-pro/'.$img->image) }}">
                 @endforeach
-
             </div>
-
-
             <button class="btn btn-success mt-4 ms-2" type="submit" id="buttonAddPro" style="width:10%;font-size:2vw;font-size:2vh"
                 name="addproduct">Cập nhật
             </button>
-
         </form>
-
     </div>
 </div>
-
-
-
-
-
-
-<!-- ======= Footer ======= -->
-
-
-
 <script src="{{ asset('assets/js/ckeditor/ckeditor.js') }}"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/translations/vi.js"> </script>
 <style>

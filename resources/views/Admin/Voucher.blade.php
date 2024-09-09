@@ -112,9 +112,13 @@
                                 <td>
                                     <p class="text-success">Voucher khả dụng</p>
                                 </td>
+                                @elseif ($row->soluong<=0)
+                                <td>
+                                    <p class="text-success">Voucher đã hết</p>
+                                </td>
                                 @else
                                 <td>
-                                    <p class="text-danger">Voucher đã hết</p>
+                                    <p class="text-danger">Voucher đã hết hạn</p>
                                 </td>
                                 @endif
                                 <td class="table-td-center">
@@ -167,13 +171,7 @@
         </div>
     </div>
 </div>
-
-
 <!-- ======= Footer ======= -->
-
-
-
-
 <script>
     $(document).ready(function() {
             $("#searchNV").on("keyup", function() {

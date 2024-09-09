@@ -10,16 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class VoucherUserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-    /**
-     * Store a newly created resource in storage.
-     */
+  
     public function store($id)
     {
 
@@ -32,12 +23,5 @@ class VoucherUserController extends Controller
         }
         return redirect(route('user.home'))->with('success', 'Lưu thành công');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+   
 }

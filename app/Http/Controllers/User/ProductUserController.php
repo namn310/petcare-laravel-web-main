@@ -35,23 +35,6 @@ class ProductUserController extends Controller
             return view('User.product', ['products' => $products, 'category' => $category, 'categoryName' => $categoryName]);
         }
     }
-    // public function getProductByCategory($id)
-    // {
-    //     $products = product::select()->where('idCat', $id)->get();
-    //     foreach ($products as $row) {
-    //         $id = $row->idCat;
-    //     }
-    //     $category = category::all();
-    //     $categoryName = DB::table('categories')->where('idCat', $id)->get();
-    //     return view('User.product', ['products' => $products, 'category' => $category, 'categoryName' => $categoryName]);
-    // }
-    // public function getProduct($id)
-    // {
-    //     $products = product::select()->where('idCat', $id)->get();
-    //     $category = category::all();
-    //     $categoryName = DB::table('categories')->where('idCat', $id)->get();
-    //     return view('User.product', ['products' => $products, 'category' => $category, 'categoryName' => $categoryName]);
-    // }
     public function getDetail($id)
     {
         $comment = Comment::select()->where('idPro', $id)->get();
@@ -72,8 +55,6 @@ class ProductUserController extends Controller
         $sortField = $request->input('sort_field');
         $sortOrder = $request->input('sort_order');
         $idCat = $request->input('catId');
-        // $product = DB::table('products')->select()->join('image_products', 'products.idPro', '=', 'image_products.idPro')->where('idCat', $idCat)->groupBy('image_products.idPro')->orderBy($sortField, $sortOrder)->get();
-        // dd($Pro);
         $productList = product::select()->where('idCat', $idCat)->orderBy($sortField, $sortOrder)->get();
         $product = [];
         foreach ($productList as $a) {
@@ -87,7 +68,6 @@ class ProductUserController extends Controller
             $product[] = $productItem;
         }
         return response()->json($product);
-
         // return response()->json(['error' => 'Internal Server Error'], 500);
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('status');
             $table->unsignedInteger('id_voucher');
             $table->foreign('id_voucher')->references('id')->on('vouchers')->onDelete('cascade');
-            $table->unsignedInteger('id_Cus');
+            $table->unsignedBigInteger('id_Cus');
             $table->foreign('id_Cus')->references('id')->on('customer')->onDelete('cascade');
             $table->timestamps();
         });

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('note')->nullable();
             $table->integer('status')->default(0);
             $table->timestamps();
-            $table->unsignedInteger('idCus');
+            $table->unsignedBigInteger('idCus');
             $table->foreign('idCus')->references('id')->on('customer')->onDelete('cascade');
         });
     }

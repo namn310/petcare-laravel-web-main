@@ -15,7 +15,6 @@
   </script>
   @endif
   <div class="main-content mt-4">
-
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
       <!-- Navbar -->
       <!-- End Navbar -->
@@ -169,7 +168,6 @@
                       <span class="font-weight-bold ms-1">30 done</span> this month
                     </p> --}}
                   </div>
-
                 </div>
               </div>
               <div class="card-body px-0 pb-2">
@@ -208,23 +206,19 @@
                           Đơn hàng chưa được xác nhận
                         </td>
                         @endif
-
                       </tr>
                       @endforeach
-
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-            <div class="card" style="border:1px solid black">
+            <div class="card w-100" style="border:1px solid black">
               <div class="card-header pb-0">
                 <div class="row">
                   <div class="col-lg-6 col-7">
                     <h4 class="text-black">Sản phẩm hot</h4>
-                  
                   </div>
-
                 </div>
               </div>
               <div class="card-body px-0 pb-2">
@@ -257,12 +251,9 @@
                         @else
                         <td></td>
                         @endif
-
                         <td class="align-middle text-center text-sm">{{ $row->count }}</td>
-
                       </tr>
                       @endforeach
-
                     </tbody>
                   </table>
                 </div>
@@ -310,20 +301,14 @@
                   </div>
                   <hr>
                   @endforeach
-
-
-
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </main>
-
   </div>
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
@@ -573,36 +558,6 @@
             });
     
   </script>
-
 </div>
 
-<style>
-  #plots {
-    margin: auto;
-    background-color: #FFFFFF;
-    box-shadow: 3px 3px 3px black;
-  }
-</style>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-  plots = document.getElementById("plots");
-
-  var months = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"];
-  var traffic = [65, 59, 80, 81, 56, 55, 60, "Triệu VNĐ"] //Stays on the Y-axis 
-  new Chart(plots, {
-    type: 'line',
-
-    data: {
-      labels: months,
-
-      datasets: [{
-        data: traffic,
-        backgroundColor: '#FFFFFF',
-        borderColor: 'black',
-
-      }]
-    },
-  });
-</script>
 @endsection

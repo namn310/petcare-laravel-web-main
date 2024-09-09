@@ -14,6 +14,7 @@ use App\Models\Voucher;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User\Order;
 use App\Models\User\OrderDetail;
+use Error;
 
 class CartController extends Controller
 {
@@ -105,11 +106,16 @@ class CartController extends Controller
     {
 
         $cart = new Cart();
-        $idCus = Auth::guard('customer')->user()->id;
         try {
+            if (session()->has('userGoogle')) {
+                $idCus = session('userGoogle.user_google_id');
+            } else {
+                $idCus = Auth::guard('customer')->user()->id;
+            }
             $cart->checkOut($request, $idCus);
-        } catch (Throwable) {
-            return redirect(route('user.cart'))->with('error', 'Có lỗi xin vui lòng thử lại sau !');
+        } catch (Throwable $Error) {
+            dd($Error);
+            // return redirect(route('user.cart'))->with('error', 'Có lỗi xin vui lòng thử lại sau !');
         }
         session()->forget('cart');
         return redirect(route('user.cart'))->with('status', 'Đơn hàng của bạn đã được xác nhận !');

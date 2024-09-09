@@ -146,9 +146,14 @@
                                     $voucherDetail->getDateEnd($row->id_voucher)
                                     }}</i>
                                 </span>
-                                <div class="">
+                                <div>
+                                  @if ($row->status==0)
+                                  <button class="btn btn-light">Đã hết hạn</button>
+                                  @else
                                   <button class="btn btn-light useVoucher" data-voucher="{{ $row->id }}">Sử
                                     dụng</button>
+                                  @endif
+
                                 </div>
                               </div>
                             </div>

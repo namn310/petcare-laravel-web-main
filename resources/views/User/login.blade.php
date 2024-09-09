@@ -31,7 +31,7 @@
                                 heading: 'Thông báo',
                                 text: '{{ session('status') }}',
                                 showHideTransition: 'slide',
-                                icon: 'success',
+                                icon: 'error',
                                 position: 'bottom-right'
                                 })
     </script>
@@ -115,7 +115,12 @@
                                     style="text-decoration: none;color:white">Đăng Nhập</a></button>
                         </div>
                     </form>
-
+                    <div class="input-group mb-3 align-items-center d-flex justify-content-center">
+                        <img src="{{ asset('assets/img/google_logo-google_icongoogle-512.webp') }}"
+                            class="img-fluid me-3" style="width:5%;height:5%">
+                        <a style="text-decoration: none;color:black" href="{{ route('loginGoogle') }}">Đăng nhập bằng
+                            Google</a>
+                    </div>
 
                     <div class="row">
                         <small>Bạn chưa có tài khoản? <a href="{{ route('user.register') }}">Đăng Ký</a></small>

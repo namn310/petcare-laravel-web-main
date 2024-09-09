@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('note')->nullable();
             $table->string('thanhtoan');
             $table->timestamps();
-            $table->unsignedInteger('idCus');
+            $table->unsignedBigInteger('idCus');
             $table->foreign('idCus')->references('id')->on('customer')->onDelete('cascade');
             $table->unsignedInteger('idVoucher')->nullable();
             $table->foreign('idVoucher')->references('id')->on('vouchers')->onDelete('cascade');

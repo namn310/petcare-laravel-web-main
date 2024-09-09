@@ -132,6 +132,9 @@ class AccountUserController extends Controller
     }
     public function logOut()
     {
+        if (session()->has('userGoogle')) {
+            session()->forget('userGoogle');
+        }
         Auth::guard('customer')->logout();
         return redirect()->route('user.home');
     }

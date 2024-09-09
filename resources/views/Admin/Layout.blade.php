@@ -92,7 +92,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="admin/register">
+                            <a class="dropdown-item d-flex align-items-center" href="{{route('admin.regist')}}">
                                 <i class="fa-solid fa-plus"></i>
                                 <span style="font-size:1.5vw;font-size:1.5vh">Tạo tài khoản</span>
                             </a>

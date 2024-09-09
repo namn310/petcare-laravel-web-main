@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 //Forgot pass
 use App\Http\Controllers\Email\ForgetPasswordController;
+use App\Http\Controllers\API\LoginGoogleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,12 +41,19 @@ use App\Http\Controllers\Email\ForgetPasswordController;
 |
 */
 
-Route::get('test', function () {
-    return view('User.test');
-});
+
+
+// Route::get('test', function () {
+//     return view('User.test');
+// });
 // Route::get('test', [TestController::class, 'index'])->name('User.test');
 // Route::post('test', [TestController::class, 'store'])->name('test.store');
+
+//Login Google
+Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('loginGoogle');
+Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback'])->name('callback');
 //user view
+
 Route::group(['namespace' => 'User', 'prefix' => ''], function () {
     //phải đăng nhập mới được truy cập
     Route::middleware('checkLoginUser')->group(function () {
@@ -77,7 +85,7 @@ Route::group(['namespace' => 'User', 'prefix' => ''], function () {
     Route::get('forgetPass', [ForgetPasswordController::class, 'index'])->name('user.forgetPass');
     Route::post('forgetPass', [ForgetPasswordController::class, 'forgetPass'])->name('user.sendEmail');
     Route::get('notification/{token}', [ForgetPasswordController::class, 'Notification'])->name('user.NotiForgetPass');
-    Route::post('resetPass',[ForgetPasswordController::class,'resetPassword'])->name('user.resetPass');
+    Route::post('resetPass', [ForgetPasswordController::class, 'resetPassword'])->name('user.resetPass');
 
     Route::get('loginUser', [AccountUserController::class, 'index'])->name('user.login');
     // Route::post('login', [AccountUserController::class, 'login'])->name('user.checkAccount');
@@ -110,6 +118,7 @@ Route::group(['namespace' => 'User', 'prefix' => ''], function () {
     Route::get('cart', [CartController::class, 'index'])->name('user.cart');
 });
 
+
 //admin view
 Route::get('admin/login', function () {
     return view('Admin.pages-login');
@@ -121,7 +130,7 @@ Route::prefix('admin')->middleware('checkLogin::class')->group(function () {
     //register
     Route::get('register', function () {
         return view('Admin.register');
-    });
+    })->name('admin.regist');
     //changepass
     Route::post('changePass', [UserController::class, 'changePass'])->name('admin.changePass');
     //updateProfile

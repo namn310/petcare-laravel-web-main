@@ -73,11 +73,9 @@
 </script>
 <!-- Danh mục sản phẩm-->
 <div class="container-fluid pdt productDetail">
-
   <div class="row a ">
     <div>
       <nav class="navbar mb-3 navbar-light bg-light justify-content-between">
-
         <form class="form-inline d-flex">
           <!-- <input class="form-control mr-sm-2" type="text" id="nameProductSearch" placeholder="Search" aria-label="Search"> -->
           <!-- <button class="btn btn-outline-success my-2 my-sm-0 ml-3" id="buttonSearch" type="button">Search</button> -->
@@ -108,9 +106,9 @@
                             autoplay: true,
                             autoplaySpeed: 900,
                             });
-
                         });
                     }
+                    
       </script>
 
       @foreach ($productDetail as $row)
@@ -237,11 +235,7 @@
               <div class="d-flex mt-3 ms-5">
                 {{-- avt user --}}
                 <div class="me-4">
-                  {{-- <img style="width:50px;height:50px;margin-left:40px;margin-top:10px;border-radius:20px"
-                    class="img-fluid rounded text-center"
-                    src="{{ asset('assets/img-avt-customer/' . $cmt->getAvtCus($cmt->idCus)) }}"> --}}
                 </div>
-
                 <div class=""
                   style="margin-bottom:20px;box-shadow: 2px 2px 2px gray;margin-top:10px;background-color:#FFFFFF;border-radius:10px;width:60%">
                   <span style="font-weight:bold;font-size:1.5vw;font-size:1.5vh;color:blue" class="user-name">{{
@@ -291,7 +285,6 @@
             <div class="card-body" id="card-body">
               <h6 id="name-product" class="card-title">
                 {{ $product->namePro }}
-
               </h6>
               <span class="rating secondary-font">
                 <i class="fa-solid fa-star text-warning"></i>
@@ -303,14 +296,12 @@
               @if ($product->discount <= 0) <p class="card-text text-danger">
                 {{ number_format($product->cost) }}đ
                 </p>
-
                 <p hidden id="productCostHidden">{{ $product->cost }}</p>
                 @else
                 <p class="card-text text-danger text-decoration-line-through">
                   {{ number_format($product->cost) }}đ
                 </p>
                 <p class="card-text text-danger" style="margin-top:-15px">
-
                   {{ number_format($product->cost - ($product->cost * $product->discount) / 100) }}đ
                 </p>
                 <p hidden id="productCostHidden">
@@ -364,8 +355,6 @@
 </div>
 <!-- End mục sản phẩm-->
 @endforeach
-
-
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
   <div id="cartSuccess" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">

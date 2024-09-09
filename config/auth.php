@@ -44,7 +44,16 @@ return [
             'driver' => 'session',
             'provider' => 'customer',
         ],
-       
+
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'customer'
+        ],
+        'google_clients' => [
+            'driver' => 'session',
+            'provider' => 'google_clients'
+        ],
+
     ],
 
 
@@ -73,7 +82,15 @@ return [
         'customer' => [
             'driver' => 'eloquent',
             'model' => App\Models\User\Customer::class,
-        ]
+        ],
+        'google_clients' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User\GoogleUser::class,
+        ],
+
+    ],
+    'socialite' => [
+        'driver' => 'google',
     ],
 
     /*
@@ -105,6 +122,11 @@ return [
         'customer' => [
             'provider' => 'customer',
             'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'google_clients' => [
+            'provider' => 'google_clients',
             'expire' => 60,
             'throttle' => 60,
         ]

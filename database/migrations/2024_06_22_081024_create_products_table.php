@@ -32,7 +32,7 @@ return new class extends Migration
         });
 
         Schema::create('customer', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -51,7 +51,6 @@ return new class extends Migration
     {
         Schema::dropIfExists('categories');
         Schema::dropIfExists('products');
-
         Schema::dropIfExists('customer');
     }
 };

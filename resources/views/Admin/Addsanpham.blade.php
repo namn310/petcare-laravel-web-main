@@ -139,38 +139,40 @@
     </nav>
     <div style="background-color: white;padding:20px;border-radius:20px;box-shadow: 2px 2px 2px #FFCC99;">
         <!-- End Page Title -->
-        <form style="font-size:2vw;font-size:2vh" method="post" id="AddProForm" action="{{ route('admin.createProduct') }}" enctype="multipart/form-data"
-            class="row mt-4">
+        <form style="font-size:2vw;font-size:2vh" method="post" id="AddProForm"
+            action="{{ route('admin.createProduct') }}" enctype="multipart/form-data" class="row mt-4">
             @csrf
             <div class="form-group col-md-4">
                 <label style="font-weight: bolder;" class="control-label">Tên sản phẩm</label>
-                <input style="font-size:2vw;font-size:2vh" class="form-control" id="namepro" name="namepro" onclick="checkName()" onchange="checkName()"
-                    type="text" required>
+                <input style="font-size:2vw;font-size:2vh" class="form-control" id="namepro" name="namepro"
+                    onclick="checkName()" onchange="checkName()" type="text" required>
             </div>
             <div class="form-check ms-3">
                 <label style="font-weight: bolder;" class="form-check-label">Sản phẩm hot</label>
                 <input style="font-size:2vw;font-size:2vh" type="hidden" name="hotPro" value="0">
-                <input style="font-size:2vw;font-size:2vh" type="checkbox" class="form-check-input" name="hotPro" value="1">
+                <input style="font-size:2vw;font-size:2vh" type="checkbox" class="form-check-input" name="hotPro"
+                    value="1">
             </div>
             <div class="form-group col-md-4">
                 <label style="font-weight: bolder;" class="control-label">Số lượng</label>
-                <input style="font-size:2vw;font-size:2vh" class="form-control" onclick="checkCount()" onchange="checkCount()" name="countpro" id="countpro"
-                    type="text" required>
+                <input style="font-size:2vw;font-size:2vh" class="form-control" onclick="checkCount()"
+                    onchange="checkCount()" name="countpro" id="countpro" type="text" required>
             </div>
             <div class="form-group col-md-4">
                 <label style="font-weight: bolder;" class="control-label mt-3">Giá bán(VND)</label>
-                <input style="font-size:2vw;font-size:2vh" class="form-control" id="giabanpro" name="giabanpro" onclick="checkGiaBanPro()"
-                    onchange="checkGiaBanPro()" type="text" required>
+                <input style="font-size:2vw;font-size:2vh" class="form-control" id="giabanpro" name="giabanpro"
+                    onclick="checkGiaBanPro()" onchange="checkGiaBanPro()" type="text" required>
             </div>
             <div class="form-group  col-md-4">
                 <label style="font-weight: bolder;" class="control-label mt-3">Giảm giá(%)</label>
-                <input style="font-size:2vw;font-size:2vh" class="form-control" id="giavonpro" name="discount" type="text">
+                <input style="font-size:2vw;font-size:2vh" class="form-control" id="giavonpro" name="discount"
+                    type="text">
             </div>
 
             <div class="form-group col-md-3">
                 <label style="font-weight: bolder;" class="control-label mt-3">Danh mục</label>
-                <select style="font-size:2vw;font-size:2vh" class="form-control" onclick="checkDanhMuc()" onchange="checkDanhMuc()" id="danhmucAddpro"
-                    required name="danhmucAddpro" required>
+                <select style="font-size:2vw;font-size:2vh" class="form-control" onclick="checkDanhMuc()"
+                    onchange="checkDanhMuc()" id="danhmucAddpro" required name="danhmucAddpro" required>
                     <option>Chọn danh mục</option>
                     @foreach ($category as $row )
                     <option>{{ $row->name }}</option>
@@ -186,12 +188,11 @@
             </div>
             <div class="form-group col-md-12">
                 <label style="font-weight: bolder;" class="control-label mt-3">Ảnh sản phẩm</label>
-                <input style="font-size:2vw;font-size:2vh" class="form-control" multiple id="imagepro" name="imagepro[]" style="width:30%" type="file">
+                <input style="font-size:2vw;font-size:2vh" class="form-control" multiple id="imagepro" name="imagepro[]"
+                    style="width:30%" type="file">
             </div>
-
-
-            <button class="btn btn-success mt-4 ms-2" type="submit" id="buttonAddPro" style="width:10%;font-size:2vw;font-size:2vh"  value="Thêm"
-                name="addproduct"> Thêm
+            <button class="btn btn-success mt-4 ms-2" type="submit" id="buttonAddPro"
+                style="width:10%;font-size:2vw;font-size:2vh" value="Thêm" name="addproduct"> Thêm
             </button>
         </form>
 
