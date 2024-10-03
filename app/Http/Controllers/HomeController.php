@@ -22,7 +22,6 @@ class HomeController extends Controller
         //update status discount
         $discount = new Discount();
         $discount->updateStatusDiscount();
-        $discount->updateDiscountProduct();
         //update status voucher
         $voucher = new Voucher();
         $voucher->updateStatusVoucher();

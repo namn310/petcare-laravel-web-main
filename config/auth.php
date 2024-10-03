@@ -49,10 +49,10 @@ return [
             'driver' => 'passport',
             'provider' => 'customer'
         ],
-        'google_clients' => [
-            'driver' => 'session',
-            'provider' => 'google_clients'
-        ],
+        // 'google_clients' => [
+        //     'driver' => 'session',
+        //     'provider' => 'google_clients'
+        // ],
 
     ],
 
@@ -83,10 +83,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User\Customer::class,
         ],
-        'google_clients' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User\GoogleUser::class,
-        ],
+        // 'google_clients' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User\GoogleUser::class,
+        // ],
 
     ],
     'socialite' => [
@@ -125,11 +125,11 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-        'google_clients' => [
-            'provider' => 'google_clients',
-            'expire' => 60,
-            'throttle' => 60,
-        ]
+        // 'google_clients' => [
+        //     'provider' => 'google_clients',
+        //     'expire' => 60,
+        //     'throttle' => 60,
+        // ]
     ],
 
     /*

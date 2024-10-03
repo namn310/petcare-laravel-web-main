@@ -67,9 +67,9 @@ class AccountUserController extends Controller
             ]);
             $customer->save();
         } catch (Throwable) {
-            return back()->with('status', 'Email đã tồn tại')->withInput();
+            return back()->with('statusError', 'Email đã tồn tại')->withInput();
         }
-        return redirect(route('user.login'))->with('status', 'Đăng ký thành công !');
+        return redirect(route('user.login'))->with('statusSuccess', 'Đăng ký thành công !');
         // try {
         //$customer->createAccount($request);
         // } catch (Throwable) {
@@ -132,9 +132,9 @@ class AccountUserController extends Controller
     }
     public function logOut()
     {
-        if (session()->has('userGoogle')) {
-            session()->forget('userGoogle');
-        }
+        // if (session()->has('userGoogle')) {
+        //     session()->forget('userGoogle');
+        // }
         Auth::guard('customer')->logout();
         return redirect()->route('user.home');
     }

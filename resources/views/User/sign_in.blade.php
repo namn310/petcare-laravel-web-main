@@ -14,8 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     {{-- toast message --}}
     <script src="
-        https://cdn.jsdelivr.net/npm/jquery-toast-plugin@1.3.2/dist/jquery.toast.min.js
-        "></script>
+            https://cdn.jsdelivr.net/npm/jquery-toast-plugin@1.3.2/dist/jquery.toast.min.js
+            "></script>
     <link href="
         https://cdn.jsdelivr.net/npm/jquery-toast-plugin@1.3.2/dist/jquery.toast.min.css
         " rel="stylesheet">
@@ -23,32 +23,32 @@
 
 
 <body>
-    @if (session('status'))
+    @if (session('statusError'))
     <script>
         $.toast({
-                            heading: 'Thông báo',
-                            text: '{{ session('status') }}',
-                            showHideTransition: 'slide',
-                            icon: 'error',
-                            position: 'bottom-right'
-                            })
+                heading: 'Thông báo',
+                text: '{{ session('statusError') }}',
+                showHideTransition: 'slide',
+                icon: 'error',
+                position: 'bottom-right'
+            })
     </script>
-    {{-- <div class="alert alert-danger alert-dismissible" style="width:30%;position:absolute;right:20px;top:20px">
-        <p>{{ session('status') }}</p>
-        <button class="btn btn-close" data-bs-dismiss="alert"></button>
-    </div> --}}
+    @endif
+    @if (session('statusSuccess'))
+    <script>
+        $.toast({
+                    heading: 'Thông báo',
+                    text: '{{ session('statusSuccess') }}',
+                    showHideTransition: 'slide',
+                    icon: 'success',
+                    position: 'bottom-right'
+                })
+    </script>
     @endif
     <!----------------------- Main Container -------------------------->
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
-
-
-
-
         <!----------------------- Login Container -------------------------->
         <div class="row border rounded-5 p-3 bg-white shadow box-area">
-
-
-
 
             <!--------------------------- Left Box ----------------------------->
             <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
@@ -58,8 +58,6 @@
                 </div>
 
             </div>
-
-
             <!-------------------- ------ Right Box ---------------------------->
             <div class="col-md-6 right-box">
                 <div class="row align-items-center text-center">
@@ -208,7 +206,8 @@
         }
 
         function checkFormRegis() {
-            if (checkRePass() !== true || checkPassword() !== true || checkEmail() !== true || checkUser() !== true || checkPhone() == false) {
+            if (checkRePass() !== true || checkPassword() !== true || checkEmail() !== true || checkUser() !== true ||
+                checkPhone() == false) {
                 return confirm("Kiểm tra lại thông tin");
             } else {
 

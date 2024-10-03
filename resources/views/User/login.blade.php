@@ -35,10 +35,6 @@
                                 position: 'bottom-right'
                                 })
     </script>
-    {{-- <div class="alert alert-success alert-dismissible" style="width:30%;position:absolute;right:20px;top:20px">
-        <p>{{ session('status') }}</p>
-        <button class="btn btn-close" data-bs-dismiss="alert"></button>
-    </div> --}}
     @endif
     @if (session('notice'))
     <script>
@@ -50,35 +46,15 @@
                                 position: 'bottom-right'
                                 })
     </script>
-    {{-- <div class="alert alert-danger alert-dismissible" style="width:30%;position:absolute;right:20px;top:20px">
-        <p>{{ session('notice') }}</p>
-        <button class="btn btn-close" data-bs-dismiss="alert"></button>
-    </div> --}}
     @endif
-    <!----------------------- Main Container -------------------------->
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
-
-
-
-
-        <!----------------------- Login Container -------------------------->
         <div class="row border rounded-5 p-3 bg-white shadow box-area">
-
-
-
-
-            <!--------------------------- Left Box ----------------------------->
             <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box"
                 style="background: #FFE4DA;">
                 <div class="featured-image mb-3">
                     <img src="{{ asset('assets/img/PetCARE.png') }}" class="img-fluid mt-3" style="width:100%">
                 </div>
-
-
             </div>
-
-
-            <!-------------------- ------ Right Box ---------------------------->
             <div class="col-md-6 right-box">
                 <div class="row align-items-center">
                     <div class="header-text mb-4">

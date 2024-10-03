@@ -110,12 +110,11 @@ $product = product::select()->get();
                         </div>
                     </div>
                     <div class="buttonInforUser">
-                        @if (!Auth::guard('customer')->check() && !session('userGoogle'))
+                        @if (!Auth::guard('customer')->check())
                         <a style="text-decoration:none;color:black" style="font-size: 1.3vw" class="me-2 ms-2"
                             href="{{ route('user.login') }}">Đăng
                             Nhập</a><span></span>
                         @else
-
                         <div class="nav-item dropdown me-5">
                             <a class=" login-button dropdown-toggle" style="width:190px" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i>
@@ -172,14 +171,13 @@ $product = product::select()->get();
                                 <li class="nav-item me-4">
                                     <a class="nav-link" href="{{ route('user.book') }}"><b>Đặt lịch </b></a>
                                 </li>
-                                {{-- <li class="nav-item me-4">
+                                <li class="nav-item me-4">
                                     <a class="nav-link" href="{{ route('user.contact') }}"><b>Liên hệ </b></a>
-                                </li> --}}
+                                </li>
                                 <li class="nav-item me-4">
                                     <a class="nav-link" type="button" href="{{ route('user.cart') }}"><b>Giỏ hàng
                                         </b><i class="fa-solid fa-cart-shopping ms-1">
-                                            @if (session('cart') && (Auth::guard('customer')->check()||
-                                            Auth::guard('google_clients')->check()))
+                                            @if (session('cart') && Auth::guard('customer')->check() )
                                             <span
                                                 class="position-absolute top-0 ms-2 translate-middle badge rounded-pill bg-danger">{{
                                                 $total }}

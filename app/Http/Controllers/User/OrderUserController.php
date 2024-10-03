@@ -14,7 +14,12 @@ class OrderUserController extends Controller
 {
     public function index()
     {
-        $idCus = Auth('customer')->user()->id;
+        // if(session('userGoogle')){
+        //     $idCus = session('userGoogle')['user_google_id'];
+        // }
+        // else{
+            $idCus = Auth('customer')->user()->id;
+        // }
         $Order = Order::select()->where('idCus', $idCus)->get()->sortByDesc('id');
         $Count = Order::select()->where('idCus', $idCus)->get()->count();
         if ($Count) {
